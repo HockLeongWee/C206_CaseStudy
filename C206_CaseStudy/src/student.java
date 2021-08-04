@@ -16,23 +16,15 @@ public class student {
 	private String grade;
 	private String className;
 	private String classroomTeacher;
-	private String parentName;
-	private String parentEmail;
-	private String contactNum;
-	private boolean isAvailable;
 	
-	public student(String id, String name, String grade, String className, String classroomTeacher, String parentName,
-			      String parentEmail, String contactNum, boolean isAvailable) {
+	
+	public student(String id, String name, String grade, String className, String classroomTeacher) {
 		
 	this.id = id;
 	this.name = name;
 	this.grade = grade;
 	this.className = className;
 	this.classroomTeacher = classroomTeacher;
-	this.parentName = parentName;
-	this.parentEmail = parentEmail;
-	this.contactNum = contactNum;
-	this.isAvailable = isAvailable;
 	}
 	public String getId() {
 		return id;
@@ -63,29 +55,5 @@ public class student {
 	}
 	public void setClassroomTeacher(String classroomTeacher) {
 		this.classroomTeacher = classroomTeacher;
-	}
-	public String getParentName() {
-		return parentName;
-	}
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-	public String getParentEmail() {
-		return parentEmail;
-	}
-	public void setParentEmail(String parentEmail) {
-		this.parentEmail = parentEmail;
-	}
-	public String getContactNum() {
-		return contactNum;
-	}
-	public void setContactNum(String contactNum) {
-		this.contactNum = contactNum;
-	}
-	public boolean isAvailable() {
-		return isAvailable;
-	}
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
 	}
 }
