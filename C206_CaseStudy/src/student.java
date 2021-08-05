@@ -1,24 +1,15 @@
-/*
- * I declare that this code was written by me. 
- * I will not copy or allow others to copy my code. 
- * I understand that copying code is considered as plagiarism.
- * 
- * Student Name: Izzat Zahirin
- * Student ID: 20042321
- * Class: E37E
- * Date/Time created: Monday 02-08-2021 16:41
- */
+
 
 public class student {
 	
-	private String id;
+	private int id;
 	private String name; 
 	private String grade;
 	private String className;
 	private String classroomTeacher;
 	
 	
-	public student(String id, String name, String grade, String className, String classroomTeacher) {
+	public student(int id, String name, String grade, String className, String classroomTeacher) {
 		
 	this.id = id;
 	this.name = name;
@@ -26,10 +17,10 @@ public class student {
 	this.className = className;
 	this.classroomTeacher = classroomTeacher;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
