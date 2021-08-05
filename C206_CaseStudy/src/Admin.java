@@ -12,6 +12,7 @@
 public class Admin {
 	private String name;
 	private String password;
+<<<<<<< HEAD
 	private String adminId;
 	
 	public Admin(String name, String password, String adminId) {
@@ -42,6 +43,38 @@ public class Admin {
 	}
 
 	public void setAdminId(String adminId) {
+=======
+	private int adminId;
+	
+	public Admin(String name, String password, int adminId) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.adminId = adminId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(int adminId) {
+>>>>>>> branch 'master' of https://github.com/HockLeongWee/C206_CaseStudy
 		this.adminId = adminId;
 	}
 }
