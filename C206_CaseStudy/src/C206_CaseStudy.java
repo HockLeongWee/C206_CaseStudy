@@ -3,6 +3,13 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		// ArrayList for Parent
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 101, "Bobby Lim", 1, 1, "Mr Wee"));
+		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 102, "Timmy Neo", 1, 3, "Mr Tan"));
+		
+		// ArrayList for CCA Categories
 		ArrayList<CategoryCCA>categoryList = new ArrayList<CategoryCCA>();
 		categoryList.add(new CategoryCCA("Sports", 1));
 		categoryList.add(new CategoryCCA("Science", 2));
@@ -15,7 +22,10 @@ public class C206_CaseStudy {
 			loginPage();
 			option = Helper.readInt("Enter option > ");
 			if (option == 1) {
-	// Write Code on creating parents account with student information
+				
+				// Write Code on creating parents account with student information
+				Parent parent = newParent();
+				C206_CaseStudy.addParent(parentList, parent);
 				
 	// Also add student into the student array list when parents registering with the student information
 
@@ -55,9 +65,15 @@ public class C206_CaseStudy {
 					}else if(choice == 6) {
 						// Write code to delete CCA with it's related Category
 					}else if(choice == 7) {
+						
 						// Write code to view all registered parents
+						C206_CaseStudy.viewAllParent(parentList);
+						
 					}else if(choice == 8) {
+						
 						// Write code to delete parents account ONLY after making sure that child is registered. Else don't delete yet.
+						C206_CaseStudy.deleteParent(parentList);
+						
 					}else if(choice == 9) {
 						System.out.println("BYE");
 					}else{
@@ -150,5 +166,86 @@ public class C206_CaseStudy {
 		}
 	}
 	
+	public static void setHeader(String header) { // Hermione
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+	
+	public static Parent newParent() { // Hermione
+		String name = Helper.readString("Enter name > ");
+		String email = Helper.readString("Enter email > ");
+		int mobile = Helper.readInt("Enter contact no. > ");
+		int studentID = Helper.readInt("Enter child's student ID > ");
+		String studentName = Helper.readString("Enter child's name > ");
+		int grade = Helper.readInt("Enter child's grade > ");
+		int classroom = Helper.readInt("Enter child's class > ");
+		String teacher = Helper.readString("Enter classroom teacher's name > ");
+		
+		String ccaRegisterID = "1234c"; // Once the CCA registration thing done do change this hardcoded one
+
+		Parent parent= new Parent(name, ccaRegisterID, email, mobile, studentID, studentName, grade, classroom, teacher);
+		System.out.println("Your CCA Resgistration ID is " + ccaRegisterID);
+		return parent;
+		
+		
+	}
+	
+	public static void addParent(ArrayList<Parent> parentList, Parent parent) { // Hermione
+		
+		parentList.add(parent);
+		System.out.println("Parent added");
+	}
+	
+	public static boolean doDeleteParent(ArrayList<Parent> parentList, String name, int studentID) { // Hermione
+		
+		boolean isDeleted = false;
+
+		for (int i = 0; i < parentList.size(); i++) {
+			if (name.equalsIgnoreCase(parentList.get(i).getName())
+					&& parentList.get(i).getStudentID() == studentID) {
+				
+				parentList.remove(i);
+				
+				isDeleted = true;
+				
+			}
+		}
+		return isDeleted;
+	}
+	
+	public static void deleteParent(ArrayList<Parent> parentList) { // Hermione
+		String name = Helper.readString("Enter name > ");
+		int studentID = Helper.readInt("Enter student ID > ");
+		Boolean isLoaned = doDeleteParent(parentList, name, studentID);
+		if (isLoaned == false) {
+			System.out.println("Invalid account");
+		} else {
+			System.out.println(name + "'s parent account has been deleted.");
+		}
+	}
+	
+	public static String retrieveAllParent(ArrayList<Parent> parentList) { // Hermione
+		String output = "";
+
+		for (int i = 0; i < parentList.size(); i++) {
+
+			output += String.format("%-15s %-20s %-15d %-15d %-15s %-10d %-10d %-10s\n",
+					parentList.get(i).getName(), parentList.get(i).getEmail(),
+					parentList.get(i).getMobile(), parentList.get(i).getStudentID(),
+					parentList.get(i).getStudentName(), parentList.get(i).getGrade(),
+					parentList.get(i).getClassroom(),parentList.get(i).getTeacher());
+		}
+		return output;
+	}
+	
+	public static void viewAllParent(ArrayList<Parent> parentList) { // Hermione
+		C206_CaseStudy.setHeader("REGISTERED PARENTS");
+		String output = String.format("%-15s %-20s %-15s %-15s %-15s %-10s %-10s %-10s\n",
+				"NAME", "EMAIL", "CONTACT NO.", "STUDENT ID","STUDENT NAME", "GRADE", "CLASS", "TEACHER");
+		 output += retrieveAllParent(parentList);	
+		System.out.println(output);
+
+	}
 
 }
