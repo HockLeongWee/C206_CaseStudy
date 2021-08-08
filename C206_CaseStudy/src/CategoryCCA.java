@@ -25,9 +25,4 @@ public int getCategordID() {
 public void setCategordID(int categoryID) {
 	this.categoryID = categoryID;
 }
-
-
-
-
-
 }
