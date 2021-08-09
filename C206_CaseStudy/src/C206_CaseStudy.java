@@ -49,13 +49,12 @@ public class C206_CaseStudy {
 				// Write code to allow user to select a category
 				// Write code for view all CCA related to the category
 				C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
-
 				// Write code to allow user to select a CCA - By Yi Jou
-
-				// Write code to add student to CCA - By Yi Jou
+				C206_CaseStudy.addCCA(listofCCAs);
+				// Write code to add student to CCA - By Jun Long
 
 				// Write code to view student that's added to the CCA - By Izzat
-
+				
 			} else if (option == 3) {
 				String userName = Helper.readString("Enter your username > "); // Jun Long
 				String password = Helper.readString("Enter your password > ");
@@ -82,10 +81,8 @@ public class C206_CaseStudy {
 						} else if (choice == 6) {
 							// Write code to delete CCA with it's related Category
 						} else if (choice == 7) {
-
 							// Write code to view all registered parents
 							C206_CaseStudy.viewAllParent(parentList);
-
 						} else if (choice == 8) {
 							// Write code to delete parents account ONLY after making sure that child is
 							// registered. Else don't delete yet.
@@ -165,15 +162,19 @@ public class C206_CaseStudy {
 			System.out.println("Please enter a Category Name");
 		} else {
 			for (int i = 0; i < categoryList.size(); i++) {
-				if (categoryList.get(i).equals(null) == false) {
-
-					categoryList.add(new CategoryCCA(categoryName,
-							(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
-					C206_CaseStudy.viewAllCCACategory(categoryList);
-					break;
-				} else {
-					System.out.println("Don't ask me why it's empty");
+					if(categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
+				}else {
+					if (categoryList.get(i).equals(null) == false) {
+						System.out.println(categoryName + " is already added!");
+						categoryList.add(new CategoryCCA(categoryName,
+								(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
+						C206_CaseStudy.viewAllCCACategory(categoryList);
+						break;
+					} else {
+						System.out.println("Don't ask me why it's empty");
+					}
 				}
+
 
 			}
 		}
@@ -184,12 +185,13 @@ public class C206_CaseStudy {
 		int categoryID = Helper.readInt("Category ID > ");
 
 		if (categoryName.equalsIgnoreCase(null) == false) {
-
 			for (int i = 0; i < categoryList.size(); i++) {
 				if (categoryID == categoryList.get(i).getCategordID()
 						&& categoryName.equalsIgnoreCase(categoryList.get(i).getCategoryName())) {
 					categoryList.remove(i);
 					System.out.println("Category successfully deleted.");
+				}else {
+					System.out.println("Please enter a category name from the list!");
 				}
 			}
 		} else {
@@ -277,8 +279,8 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void addCCA(ArrayList<CCA> listofCCAs) {
-		String CCAname = Helper.readString("CCA name > ");
+	public static void addCCA(ArrayList<CCA> listofCCAs) { // For HockLeong, add Category view inside, and keep the selection of the category name
+		String CCAname = Helper.readString("CCA name > "); // later on add the category based on the user selection before adding a cca
 		String CCAdescription = Helper.readString("CCA description > ");
 		int CCAsize = Helper.readInt("Class size > ");
 		String CCAday = Helper.readString("Day of the week > ");
