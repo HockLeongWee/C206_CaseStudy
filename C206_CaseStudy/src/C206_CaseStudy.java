@@ -43,7 +43,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 2) {
 				// Write code for log in with student id & registration id
-				loginToRegister();
+				loginSystem();
 				// Write code for view all category
 				C206_CaseStudy.viewAllCCACategory(categoryList); // Show Category
 				// Write code to allow user to select a category
@@ -59,8 +59,8 @@ public class C206_CaseStudy {
 			} else if (option == 3) {
 				String userName = Helper.readString("Enter your username > "); // Jun Long
 				String password = Helper.readString("Enter your password > ");
-
 				if (userName.equals("Admin") && password.equals("admin")) {
+					
 					System.out.println("Login successfully! \n");
 					while (choice != 9) {
 						C206_CaseStudy.ccaInstructor();
@@ -119,13 +119,10 @@ public class C206_CaseStudy {
 		Helper.line(50, "-");
 	}
 
-	public static void loginToRegister() { // done by Jun Long
+	public static void loginSystem() { // done by Jun Long
 		System.out.println("WELCOME");
 		int studentID = Helper.readInt("Enter your student ID > ");
 		int ccaID = Helper.readInt("Enter your CCA registration ID > ");
-//		for (Student s: parentList) {
-//			
-//		}
 
 	}
 
