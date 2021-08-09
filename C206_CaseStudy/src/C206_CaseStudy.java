@@ -58,9 +58,9 @@ public class C206_CaseStudy {
 
 			} else if (option == 3) {
 				String userName = Helper.readString("Enter your username > "); // Jun Long
-				String pw = Helper.readString("Enter your password > ");
+				String password = Helper.readString("Enter your password > ");
 
-				if (userName.equals("Admin") && pw.equals("admin")) {
+				if (userName.equals("Admin") && password.equals("admin")) {
 					System.out.println("Login successfully! \n");
 					while (choice != 9) {
 						C206_CaseStudy.ccaInstructor();
