@@ -87,7 +87,6 @@ public class C206_CaseStudy {
 							C206_CaseStudy.viewAllParent(parentList);
 
 						} else if (choice == 8) {
-							// DONT YOU DARE COMMIT THIS CODE I SWEAR TO GOD
 							// Write code to delete parents account ONLY after making sure that child is
 							// registered. Else don't delete yet.
 							C206_CaseStudy.deleteParent(parentList);
