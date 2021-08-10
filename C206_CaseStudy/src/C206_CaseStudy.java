@@ -28,8 +28,8 @@ public class C206_CaseStudy {
 
 		// ArrayList for Student
 		ArrayList<student> studentList = new ArrayList<student>();
-		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", "1240d"));
-		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", "1235a"));
+		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", "1234b"));
+		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", "1234a"));
 		studentList.add(new student(20018482, "Ezekiel", "P6", "W36D", "Mr Lim Yan", "1234c"));
 		studentList.add(new student(20018482, "Danny", "P1", "W11D", "Ms Yeo", "1235w"));
 
