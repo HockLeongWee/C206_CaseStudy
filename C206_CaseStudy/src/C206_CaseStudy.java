@@ -7,8 +7,10 @@ public class C206_CaseStudy {
 
 		// ArrayList for Parent
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 20042341, "Srinivas", "P2", "W64J", "Julia"));
-		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 20358305, "Zane Tan", "P3", "W64G", "Desmond"));
+		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 20042341, "Srinivas", "P2", "W64J",
+				"Julia"));
+		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 20358305, "Zane Tan", "P3", "W64G",
+				"Desmond"));
 
 		// ArrayList for CCA Categories
 		ArrayList<CategoryCCA> categoryList = new ArrayList<CategoryCCA>();
@@ -28,7 +30,7 @@ public class C206_CaseStudy {
 		ArrayList<student> studentList = new ArrayList<student>();
 		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", "1240d"));
 		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", "1235a"));
-		studentList.add(new student(20018482,"Ezekiel", "P6", "W36D", "Mr Lim Yan", "1234c"));
+		studentList.add(new student(20018482, "Ezekiel", "P6", "W36D", "Mr Lim Yan", "1234c"));
 		studentList.add(new student(20018482, "Danny", "P1", "W11D", "Ms Yeo", "1235w"));
 
 		// Skeleton Code, credits to Izzat and Jun Long for making it easier for me
@@ -51,7 +53,7 @@ public class C206_CaseStudy {
 			} else if (option == 2) {
 				// Write code for log in with student id & registration id
 				String output = "";
-				if(parentLoginSystem(parentList) == true) {
+				if (parentLoginSystem(parentList) == true) {
 					// Write code for view all category
 					C206_CaseStudy.viewAllCCACategory(categoryList); // Show Category
 					// Write code to allow user to select a category
@@ -145,7 +147,6 @@ public class C206_CaseStudy {
 //		System.out.println(isValid);
 //		return isValid;
 //	}
-	
 
 	public static boolean parentLoginSystem(ArrayList<Parent> parentList) { // done by Jun Long
 		System.out.println("WELCOME");
@@ -153,12 +154,14 @@ public class C206_CaseStudy {
 		String ccaID = Helper.readString("Enter your CCA registration ID > ");
 		String output = "";
 		boolean isValid = false;
-		for(int i = 0; i < parentList.size(); i++) {
-			if(parentList.get(i).getStudentID() == studentID && parentList.get(i).getRegisterID().equals(ccaID)) {
+		for (int i = 0; i < parentList.size(); i++) {
+			if (parentList.get(i).getStudentID() == studentID && parentList.get(i).getRegisterID().equals(ccaID)) {
 				output += "TRUE";
 				isValid = true;
 			}
-		}System.out.println(output); return isValid;
+		}
+		System.out.println(output);
+		return isValid;
 
 	}
 
@@ -314,21 +317,27 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
-	
-	public static void addCCA(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // For HockLeong, add Category view inside, and keep the selection of the category name
+
+	public static void addCCA(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // For HockLeong, add
+																								// Category view inside,
+																								// and keep the
+																								// selection of the
+																								// category name
 		C206_CaseStudy.viewAllCCACategory(categoryList);
 		int id = Helper.readInt("Please enter a cateogry ID > ");
 		String categoryName = "";
 		int categoryID = 0;
-		String output="";
-		for(int i = 0; i < categoryList.size(); i++) {
-			if(categoryList.get(i).getCategordID() == id) {
+		String output = "";
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (categoryList.get(i).getCategordID() == id) {
 				categoryName = categoryList.get(i).getCategoryName();
 				categoryID = categoryList.get(i).getCategordID();
 				output += "Selected " + categoryName + " of category ID " + categoryID;
 			}
-		}System.out.println(output);
-		String CCAname = Helper.readString("Enter a new CCA name > "); // later on add the category based on the user selection before adding a cca
+		}
+		System.out.println(output);
+		String CCAname = Helper.readString("Enter a new CCA name > "); // later on add the category based on the user
+																		// selection before adding a cca
 		String CCAdescription = Helper.readString("Enter a new CCA description > ");
 		int CCAsize = Helper.readInt("Enter class size > ");
 		String CCAday = Helper.readString("Enter day of the week > ");
@@ -342,8 +351,8 @@ public class C206_CaseStudy {
 		} else {
 			for (int i = 0; i < listofCCAs.size(); i++) {
 				if (listofCCAs.get(i).equals(null) == false) {
-					listofCCAs.add(
-							new CCA(CCAname, CCAdescription, CCAsize, CCAday, CCAtime, CCAvenue, CCAiic, categoryName, categoryID));
+					listofCCAs.add(new CCA(CCAname, CCAdescription, CCAsize, CCAday, CCAtime, CCAvenue, CCAiic,
+							categoryName, categoryID));
 					System.out.println("CCA added!");
 					break;
 				}
