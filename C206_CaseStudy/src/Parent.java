@@ -7,12 +7,12 @@ public class Parent {
 	private int mobile;
 	private int studentID;
 	private String studentName;
-	private int grade;
-	private int classroom;
+	private String grade;
+	private String classroom;
 	private String teacher;
 	
 	public Parent(String name, String registerID, String email, int mobile, int studentID, String studentName,
-			int grade, int classroom, String teacher) {
+			String grade, String classroom, String teacher) {
 		super();
 		this.name = name;
 		this.registerID = registerID;
@@ -73,19 +73,19 @@ public class Parent {
 		this.studentName = studentName;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 
-	public int getClassroom() {
+	public String getClassroom() {
 		return classroom;
 	}
 
-	public void setClassroom(int classroom) {
+	public void setClassroom(String classroom) {
 		this.classroom = classroom;
 	}
 
