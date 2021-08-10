@@ -62,8 +62,8 @@ public class C206_CaseStudy {
 
 					// Write code to add student to CCA - By Jun Long
 					C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList);
-					// Write code to view student that's added to the CCA - By Jun Long
-					C206_CaseStudy.viewStudentOfCCa(studentList);
+					// Write code to view student that's added to the CCA - By Izzat
+					
 				}
 
 			} else if (option == 3) {
@@ -111,6 +111,7 @@ public class C206_CaseStudy {
 							// Add Student to CCA
 						}else if(choice == 13) {
 							// View Registered Student
+							C206_CaseStudy.viewStudentOfCCa(studentList);
 						}else if(choice == 14) {
 							System.out.println("BYE");
 						} else {
