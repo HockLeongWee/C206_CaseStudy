@@ -7,8 +7,8 @@ public class C206_CaseStudy {
 
 		// ArrayList for Parent
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 101, "Bobby Lim", 1, 1, "Mr Wee"));
-		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 102, "Timmy Neo", 1, 3, "Mr Tan"));
+		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 101, "Bobby Lim", "P1", "W23A", "Mr Wee"));
+		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 102, "Timmy Neo", "P3", "W66L", "Mr Tan"));
 
 		// ArrayList for CCA Categories
 		ArrayList<CategoryCCA> categoryList = new ArrayList<CategoryCCA>();
@@ -247,8 +247,8 @@ public class C206_CaseStudy {
 		int mobile = Helper.readInt("Enter contact no. > ");
 		int studentID = Helper.readInt("Enter child's student ID > ");
 		String studentName = Helper.readString("Enter child's name > ");
-		int grade = Helper.readInt("Enter child's grade > ");
-		int classroom = Helper.readInt("Enter child's class > ");
+		String grade = Helper.readString("Enter child's grade > ");
+		String classroom = Helper.readString("Enter child's class > ");
 		String teacher = Helper.readString("Enter classroom teacher's name > ");
 
 		String ccaRegisterID = "1234c"; // Once the CCA registration thing done do change this hardcoded one
@@ -272,9 +272,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < parentList.size(); i++) {
 			if (name.equalsIgnoreCase(parentList.get(i).getName()) && parentList.get(i).getStudentID() == studentID) {
-
 				parentList.remove(i);
-
 				isDeleted = true;
 
 			}
@@ -298,7 +296,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < parentList.size(); i++) {
 
-			output += String.format("%-15s %-20s %-15d %-15d %-15s %-10d %-10d %-10s\n", parentList.get(i).getName(),
+			output += String.format("%-15s %-20s %-15d %-15d %-15s %-10s %-10s %-10s\n", parentList.get(i).getName(),
 					parentList.get(i).getEmail(), parentList.get(i).getMobile(), parentList.get(i).getStudentID(),
 					parentList.get(i).getStudentName(), parentList.get(i).getGrade(), parentList.get(i).getClassroom(),
 					parentList.get(i).getTeacher());
