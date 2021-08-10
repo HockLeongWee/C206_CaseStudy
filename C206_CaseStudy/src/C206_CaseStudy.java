@@ -52,8 +52,8 @@ public class C206_CaseStudy {
 
 			} else if (option == 2) {
 				// Write code for log in with student id & registration id
-				String output = "";
-				if (parentLoginSystem(parentList) == true) {
+				boolean loged = parentLoginSystem(parentList);
+				if (loged) {
 					// Write code for view all category
 					C206_CaseStudy.viewAllCCACategory(categoryList); // Show Category
 					// Write code to allow user to select a category
@@ -61,8 +61,9 @@ public class C206_CaseStudy {
 					C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
 
 					// Write code to add student to CCA - By Jun Long
-
-					// Write code to view student that's added to the CCA - By Izzat
+					C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList);
+					// Write code to view student that's added to the CCA - By Jun Long
+					C206_CaseStudy.viewStudentOfCCa(studentList);
 				}
 
 			} else if (option == 3) {
@@ -128,26 +129,6 @@ public class C206_CaseStudy {
 		Helper.line(50, "-");
 	}
 
-//	public static boolean parentLoginSystem(ArrayList<Parent> parentList) { // done by Jun Long
-//		System.out.println("WELCOME");
-//		int studentID = Helper.readInt("Enter your student ID > ");
-//		String ccaID = Helper.readString("Enter your CCA registration ID > ");
-//		String output = "";
-//		boolean isValid = false;
-//		for (int i = 0; i < parentList.size(); i++) {
-//			if (parentList.get(i).getStudentID() == studentID && parentList.get(i).getRegisterID().equals(ccaID)) {
-//				output += String.format("Login successfully for student ID %d\n", studentID);
-//				isValid = true;
-//				break;
-//			} else {
-//				output = String.format("Login failed for student ID %d\n", studentID);
-//				isValid = false;
-//			}
-//		}
-//		System.out.println(isValid);
-//		return isValid;
-//	}
-
 	public static boolean parentLoginSystem(ArrayList<Parent> parentList) { // done by Jun Long
 		System.out.println("WELCOME");
 		int studentID = Helper.readInt("Enter your student ID > ");
@@ -155,9 +136,14 @@ public class C206_CaseStudy {
 		String output = "";
 		boolean isValid = false;
 		for (int i = 0; i < parentList.size(); i++) {
-			if (parentList.get(i).getStudentID() == studentID && parentList.get(i).getRegisterID().equals(ccaID)) {
-				output += "TRUE";
+			if (parentList.get(i).getStudentID() == (studentID) && parentList.get(i).getRegisterID().equals(ccaID)) {
+				output += String.format("Login successfully for student ID %d\n", studentID);
 				isValid = true;
+				break;
+			} else {
+				output += String.format("Login failed for student ID %d\n", studentID);
+				isValid = false;
+				break;
 			}
 		}
 		System.out.println(output);
@@ -409,6 +395,60 @@ public class C206_CaseStudy {
 						listofCCAs.get(i).getInstructorname());
 			}
 		}
+		System.out.println(output);
+	}
+
+	public static void addStudentToCCA(ArrayList<CCA> CCAList, ArrayList<Parent> pParentList,
+			ArrayList<student> studentList) { // Done by Jun Long
+		Helper.line(50, "-");
+		System.out.println("ADD STUDENT");
+		String studentName = Helper.readString("Enter the student name > ");
+		String studentClassRoom = Helper.readString("Enter the student class room > ");
+		String ccaName = Helper.readString("Enter the CCA > ");
+		boolean ccaExist = false;
+		CCA cca = null;
+		// getting CCA whose name is our given CCA
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (ccaName.equalsIgnoreCase(CCAList.get(i).getName())) {
+
+				cca = CCAList.get(i);
+			}
+		}
+		// getting student details from parents by providing student name
+		Parent lParent = null;
+		for (int i = 0; i < pParentList.size(); i++) {
+			if (studentName.equalsIgnoreCase(pParentList.get(i).getStudentName())) {
+
+				lParent = pParentList.get(i);
+			}
+		}
+		// add the student which and note we get all student details from cca and parent
+		if (lParent != null && cca != null) {
+			studentList.add(new student(cca.getCategordID(), lParent.getStudentName(), (lParent.getGrade() + ""),
+					studentClassRoom, lParent.getTeacher(), (lParent.getStudentID() + "")));
+			System.out.println("Student Added");
+		} else
+			System.out.println("Student not added. Because There is not any student registed with that name");
+
+	}
+
+	public static String retrieveCCAStudent(ArrayList<student> studentList) { // Done by Jun Long
+		String output = "";
+
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getId() == 1 || studentList.get(i).getId() == 2)
+				output += String.format("%-15s %-20s %-15s %-15s %-15s\n", studentList.get(i).getName(),
+						studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+						studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId());
+		}
+		return output;
+	}
+
+	private static void viewStudentOfCCa(ArrayList<student> studentList) { // Done by Jun Long
+		C206_CaseStudy.setHeader("CCA Added Students");
+		String output = String.format("%-15s %-20s %-15s %-15s %-15s\n", "STUDENT NAME", "GRADE", "CLASS", "TEACHER",
+				"REGISTRATION ID");
+		output += retrieveCCAStudent(studentList);
 		System.out.println(output);
 	}
 
