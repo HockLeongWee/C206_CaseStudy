@@ -9,7 +9,6 @@ public class C206_CaseStudy {
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
 		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 20042341, "Srinivas", "P2", "W64J", "Julia"));
 		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 20358305, "Zane Tan", "P3", "W64G", "Desmond"));
-		parentList.add(new Parent("Enzo Yong", "1234c", "yongyong@321.com", 90123432, 20018482, "Ezekiel", "P6", "W36D", "Mr Lim Yan"));
 
 		// ArrayList for CCA Categories
 		ArrayList<CategoryCCA> categoryList = new ArrayList<CategoryCCA>();
