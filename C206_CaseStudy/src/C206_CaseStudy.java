@@ -63,7 +63,7 @@ public class C206_CaseStudy {
 					// Write code to add student to CCA - By Jun Long
 					C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList);
 					// Write code to view student that's added to the CCA - By Izzat
-					
+
 				}
 
 			} else if (option == 3) {
@@ -103,16 +103,16 @@ public class C206_CaseStudy {
 
 						} else if (choice == 9) {
 							// Add Student
-						}else if(choice == 10) {
+						} else if (choice == 10) {
 							// View Student
-						}else if(choice == 11) {
+						} else if (choice == 11) {
 							// Delete Student
-						}else if(choice == 12) {
+						} else if (choice == 12) {
 							// Add Student to CCA
-						}else if(choice == 13) {
+						} else if (choice == 13) {
 							// View Registered Student
 							C206_CaseStudy.viewStudentOfCCa(studentList);
-						}else if(choice == 14) {
+						} else if (choice == 14) {
 							System.out.println("BYE");
 						} else {
 							System.out.println("Invalid choice");
@@ -207,25 +207,26 @@ public class C206_CaseStudy {
 
 	public static void insertCategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
 		String categoryName = Helper.readString("Enter NEW Category Name > ");
-	if(categoryName.isEmpty() == false) {
-		if(checkDuplicateCategory(categoryName, categoryList) == false) {
-			for(int i = 0; i < categoryList.size(); i++) {
-				categoryList.add(new CategoryCCA(categoryName,
-						(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
-				break;
-			}C206_CaseStudy.viewAllCCACategory(categoryList);
-			System.out.println("No duplicates found");
-		}else {
-			System.out.println("Duplicates found");
+		if (categoryName.isEmpty() == false) {
+			if (checkDuplicateCategory(categoryName, categoryList) == false) {
+				for (int i = 0; i < categoryList.size(); i++) {
+					categoryList.add(new CategoryCCA(categoryName,
+							(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
+					break;
+				}
+				C206_CaseStudy.viewAllCCACategory(categoryList);
+				System.out.println("No duplicates found");
+			} else {
+				System.out.println("Duplicates found");
+			}
+		} else {
+			System.out.println("Please enter a name");
 		}
-	}else {
-		System.out.println("Please enter a name");
 	}
-	}
-	
+
 	public static boolean checkDuplicateCategory(String categoryName, ArrayList<CategoryCCA> categoryList) {
-		for(int i = 0; i < categoryList.size(); i++) {
-			if(categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
 				return true;
 			}
 		}
@@ -448,9 +449,9 @@ public class C206_CaseStudy {
 		if (lParent != null && cca != null) {
 			studentList.add(new student(cca.getCategordID(), lParent.getStudentName(), (lParent.getGrade() + ""),
 					studentClassRoom, lParent.getTeacher(), (lParent.getStudentID() + "")));
-			System.out.println("Student Added");
+			System.out.println("Student Added!");
 		} else
-			System.out.println("Student not added. Because There is not any student registed with that name");
+			System.out.println("Student not added! As there is no student registed with that name.");
 
 	}
 
