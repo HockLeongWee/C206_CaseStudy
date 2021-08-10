@@ -62,7 +62,7 @@ public class C206_CaseStudy {
 
 					// Write code to add student to CCA - By Jun Long
 					C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList);
-					// Write code to view student that's added to the CCA - By Izzat
+					// Write code to view student that's added to the CCA - By Jun Long
 					C206_CaseStudy.viewStudentOfCCa(studentList);
 				}
 
