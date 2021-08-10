@@ -7,8 +7,9 @@ public class C206_CaseStudy {
 
 		// ArrayList for Parent
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 101, "Bobby Lim", "P1", "W23A", "Mr Wee"));
-		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 102, "Timmy Neo", "P3", "W66L", "Mr Tan"));
+		parentList.add(new Parent("Baba Lim", "1234a", "babalim@123.com", 91234567, 20042341, "Srinivas", "P2", "W64J", "Julia"));
+		parentList.add(new Parent("Westin Tan", "1234b", "tinwes@123.com", 91345678, 20358305, "Zane Tan", "P3", "W64G", "Desmond"));
+		parentList.add(new Parent("Enzo Yong", "1234c", "yongyong@321.com", 90123432, 20018482, "Ezekiel", "P6", "W36D", "Mr Lim Yan"));
 
 		// ArrayList for CCA Categories
 		ArrayList<CategoryCCA> categoryList = new ArrayList<CategoryCCA>();
@@ -26,8 +27,9 @@ public class C206_CaseStudy {
 
 		// ArrayList for Student
 		ArrayList<student> studentList = new ArrayList<student>();
-		studentList.add(new student(101, "Bobby Lim", "A", "Mr Wee", "1234a"));
-		studentList.add(new student(102, "Timmy Neo", "A", "Mr Tan", "1234b"));
+		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", "1234a"));
+		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", "1234b"));
+		studentList.add(new student(20018482,"Ezekiel", "P6", "W36D", "Mr Lim Yan", "1234c"));
 
 		// Skeleton Code, credits to Izzat and Jun Long for making it easier for me
 		// (HockLeong) to create.
