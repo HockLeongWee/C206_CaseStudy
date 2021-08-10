@@ -199,26 +199,29 @@ public class C206_CaseStudy {
 
 	public static void insertCategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
 		String categoryName = Helper.readString("Enter NEW Category Name > ");
-
-		if (categoryName.isEmpty()) {
-			System.out.println("Please enter a Category Name");
-		} else {
-			for (int i = 0; i < categoryList.size(); i++) {
-				if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
-				} else {
-					if (categoryList.get(i).equals(null) == false) {
-						System.out.println(categoryName + " is already added!");
-						categoryList.add(new CategoryCCA(categoryName,
-								(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
-						C206_CaseStudy.viewAllCCACategory(categoryList);
-						break;
-					} else {
-						System.out.println("Don't ask me why it's empty");
-					}
-				}
-
+	if(categoryName.isEmpty() == false) {
+		if(checkDuplicateCategory(categoryName, categoryList) == false) {
+			for(int i = 0; i < categoryList.size(); i++) {
+				categoryList.add(new CategoryCCA(categoryName,
+						(i + categoryList.get(categoryList.size() - 1).getCategordID() + 1)));
+				break;
+			}C206_CaseStudy.viewAllCCACategory(categoryList);
+			System.out.println("No duplicates found");
+		}else {
+			System.out.println("Duplicates found");
+		}
+	}else {
+		System.out.println("Please enter a name");
+	}
+	}
+	
+	public static boolean checkDuplicateCategory(String categoryName, ArrayList<CategoryCCA> categoryList) {
+		for(int i = 0; i < categoryList.size(); i++) {
+			if(categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public static void deleteCategory(ArrayList<CategoryCCA> categoryList) { // Done by Hock Leong
