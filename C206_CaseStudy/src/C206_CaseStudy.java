@@ -49,8 +49,7 @@ public class C206_CaseStudy {
 				// Write code to allow user to select a category
 				// Write code for view all CCA related to the category
 				C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
-				// Write code to allow user to select a CCA - By Yi Jou
-				C206_CaseStudy.addCCA(listofCCAs);
+
 				// Write code to add student to CCA - By Jun Long
 
 				// Write code to view student that's added to the CCA - By Izzat
@@ -75,11 +74,13 @@ public class C206_CaseStudy {
 							C206_CaseStudy.deleteCategory(categoryList);
 						} else if (choice == 4) {
 							// Write code to add CCA with it's related Category
-							C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
+							C206_CaseStudy.addCCA(listofCCAs, categoryList);
 						} else if (choice == 5) {
-							// Write code to view all CCA with the related Category in it
+							// View all CCA
+							C206_CaseStudy.viewCCAs(listofCCAs);
 						} else if (choice == 6) {
-							// Write code to delete CCA with it's related Category
+							// Write code to delete CCA
+							C206_CaseStudy.deleteCCA(listofCCAs);
 						} else if (choice == 7) {
 							// Write code to view all registered parents
 							C206_CaseStudy.viewAllParent(parentList);
@@ -136,7 +137,7 @@ public class C206_CaseStudy {
 		System.out.println("============================");
 		System.out.println("4. Add a CCA");
 		System.out.println("5. View all CCA");
-		System.out.println("6. Delete a CCA Category");
+		System.out.println("6. Delete a CCA");
 		System.out.println("============================");
 		System.out.println("Parents");
 		System.out.println("============================");
@@ -279,13 +280,50 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void addCCA(ArrayList<CCA> listofCCAs) { // For HockLeong, add Category view inside, and keep the selection of the category name
-		String CCAname = Helper.readString("CCA name > "); // later on add the category based on the user selection before adding a cca
-		String CCAdescription = Helper.readString("CCA description > ");
-		int CCAsize = Helper.readInt("Class size > ");
-		String CCAday = Helper.readString("Day of the week > ");
-		String CCAtime = Helper.readString("Time > ");
-		String CCAvenue = Helper.readString("Venue > ");
+//	public static void addCCA(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // For HockLeong, add Category view inside, and keep the selection of the category name
+//		
+//		String CCAname = Helper.readString("CCA name > "); // later on add the category based on the user selection before adding a cca
+//		String CCAdescription = Helper.readString("CCA description > ");
+//		int CCAsize = Helper.readInt("Class size > ");
+//		String CCAday = Helper.readString("Day of the week > ");
+//		String CCAtime = Helper.readString("Time > ");
+//		String CCAvenue = Helper.readString("Venue > ");
+//		String CCAiic = Helper.readString("Name of CCA instructor in-charge > ");
+//
+//		if (CCAname.isEmpty() && CCAdescription.isEmpty() && CCAday.isEmpty() && CCAtime.isEmpty() && CCAvenue.isEmpty()
+//				&& CCAiic.isEmpty()) {
+//			System.out.println("CCA not added.");
+//		} else {
+//			for (int i = 0; i < listofCCAs.size(); i++) {
+//				if (listofCCAs.get(i).equals(null) == false) {
+//					listofCCAs.add(
+//							new CCA(CCAname, CCAdescription, CCAsize, CCAday, CCAtime, CCAvenue, CCAiic, "none", 0));
+//					System.out.println("CCA added!");
+//					break;
+//				}
+//			}
+//		}
+//	}
+	
+	public static void addCCA(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // For HockLeong, add Category view inside, and keep the selection of the category name
+		C206_CaseStudy.viewAllCCACategory(categoryList);
+		int id = Helper.readInt("Please enter a cateogry ID > ");
+		String categoryName = "";
+		int categoryID = 0;
+		String output="";
+		for(int i = 0; i < categoryList.size(); i++) {
+			if(categoryList.get(i).getCategordID() == id) {
+				categoryName = categoryList.get(i).getCategoryName();
+				categoryID = categoryList.get(i).getCategordID();
+				output += "Selected " + categoryName + " of category ID " + categoryID;
+			}
+		}System.out.println(output);
+		String CCAname = Helper.readString("Enter a new CCA name > "); // later on add the category based on the user selection before adding a cca
+		String CCAdescription = Helper.readString("Enter a new CCA description > ");
+		int CCAsize = Helper.readInt("Enter class size > ");
+		String CCAday = Helper.readString("Enter day of the week > ");
+		String CCAtime = Helper.readString("Enter time of CCA > ");
+		String CCAvenue = Helper.readString("Enter Venue of CCA > ");
 		String CCAiic = Helper.readString("Name of CCA instructor in-charge > ");
 
 		if (CCAname.isEmpty() && CCAdescription.isEmpty() && CCAday.isEmpty() && CCAtime.isEmpty() && CCAvenue.isEmpty()
@@ -295,7 +333,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < listofCCAs.size(); i++) {
 				if (listofCCAs.get(i).equals(null) == false) {
 					listofCCAs.add(
-							new CCA(CCAname, CCAdescription, CCAsize, CCAday, CCAtime, CCAvenue, CCAiic, "none", 0));
+							new CCA(CCAname, CCAdescription, CCAsize, CCAday, CCAtime, CCAvenue, CCAiic, categoryName, categoryID));
 					System.out.println("CCA added!");
 					break;
 				}
@@ -307,10 +345,10 @@ public class C206_CaseStudy {
 		Helper.line(40, "-");
 
 		String output = "";
-		output += String.format("%-15s %-40s %-5s %-5s %-10s %-15s %-15s\n", "CCA Name", "Description", "Class Size",
+		output += String.format("%-20s %-52s %-12s %-20s %-15s %-18s %-15s\n", "CCA Name", "Description", "Class Size",
 				"Day of the week", "Time", "Venue", "Instructor Name");
 		for (int i = 0; i < listofCCAs.size(); i++) {
-			output += String.format("%-15s %-40s %-5d %-5s %-10s %-15s %-15s\n", listofCCAs.get(i).getName(),
+			output += String.format("%-20s %-52s %-12d %-20s %-15s %-18s %-15s\n", listofCCAs.get(i).getName(),
 					listofCCAs.get(i).getDescription(), listofCCAs.get(i).getClasssize(),
 					listofCCAs.get(i).getDayoftheweek(), listofCCAs.get(i).getTime(), listofCCAs.get(i).getVenue(),
 					listofCCAs.get(i).getInstructorname());
@@ -319,6 +357,7 @@ public class C206_CaseStudy {
 	}
 
 	public static void deleteCCA(ArrayList<CCA> listofCCAs) {
+		C206_CaseStudy.viewCCAs(listofCCAs);
 		String name = Helper.readString("Enter CCA to delete > ");
 
 		if (name.equalsIgnoreCase(null) == false) {
@@ -350,5 +389,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	
+
 
 }
