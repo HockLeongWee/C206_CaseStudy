@@ -26,10 +26,10 @@ public class C206_CaseStudy {
 
 		// ArrayList for Student
 		ArrayList<student> studentList = new ArrayList<student>();
-		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", null));
-		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", null));
+		studentList.add(new student(20042341, "Zane Tan", "P3", "W64G", "Desmond", "1240d"));
+		studentList.add(new student(20358305, "Srinivas", "P2", "W64J", "Julia", "1235a"));
 		studentList.add(new student(20018482,"Ezekiel", "P6", "W36D", "Mr Lim Yan", "1234c"));
-		studentList.add(new student(20018482, "Danny", "P1", "W11D", "Ms Yeo", null));
+		studentList.add(new student(20018482, "Danny", "P1", "W11D", "Ms Yeo", "1235w"));
 
 		// Skeleton Code, credits to Izzat and Jun Long for making it easier for me
 		// (HockLeong) to create.
