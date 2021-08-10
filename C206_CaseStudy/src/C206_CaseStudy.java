@@ -72,7 +72,7 @@ public class C206_CaseStudy {
 				if (userName.equals("Admin") && password.equals("admin")) {
 
 					System.out.println("Login successfully! \n");
-					while (choice != 9) {
+					while (choice != 14) {
 						C206_CaseStudy.ccaInstructor();
 						choice = Helper.readInt("Enter choice > ");
 						if (choice == 1) {
@@ -102,6 +102,16 @@ public class C206_CaseStudy {
 							C206_CaseStudy.deleteParent(parentList);
 
 						} else if (choice == 9) {
+							// Add Student
+						}else if(choice == 10) {
+							// View Student
+						}else if(choice == 11) {
+							// Delete Student
+						}else if(choice == 12) {
+							// Add Student to CCA
+						}else if(choice == 13) {
+							// View Registered Student
+						}else if(choice == 14) {
 							System.out.println("BYE");
 						} else {
 							System.out.println("Invalid choice");
@@ -170,7 +180,18 @@ public class C206_CaseStudy {
 		System.out.println("============================");
 		System.out.println("7. View all registered parents");
 		System.out.println("8. Delete a parent account");
-		System.out.println("9. QUIT");
+		System.out.println("============================");
+		System.out.println("Student");
+		System.out.println("============================");
+		System.out.println("9. Add Student");
+		System.out.println("10. View Student");
+		System.out.println("11. Delete Student");
+		System.out.println("============================");
+		System.out.println("Others");
+		System.out.println("============================");
+		System.out.println("12. Add Student to CCA");
+		System.out.println("13. View registered Student");
+		System.out.println("14. QUIT");
 	}
 
 	public static void viewAllCCACategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
