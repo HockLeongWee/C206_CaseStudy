@@ -483,7 +483,7 @@ public class C206_CaseStudy {
 		String className = Helper.readString("Enter class name > ");
 		String classroomTeacher = Helper.readString("Enter teacher's name > ");
 		
-		Student newStudent = new Student(id, name, grade, className, classroomTeacher);
+		student newStudent = new student(id, name, grade, className, classroomTeacher);
 		
 		boolean result = C206_CaseStudy.addStudent(studentList, newStudent);
 		
