@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
@@ -488,7 +489,7 @@ public class C206_CaseStudy {
 		boolean result = C206_CaseStudy.addStudent(studentList, newStudent);
 		
 		if (result == true) {
-			Student = C206_CaseStudy.randomID(newStudent);
+			student = C206_CaseStudy.randomID(newStudent);
 		    System.out.println("Your CCA registration ID: " + Student.getRegistrationId());
 			System.out.println("Registration successful!");
 		} else {
