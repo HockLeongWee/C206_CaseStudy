@@ -490,7 +490,7 @@ public class C206_CaseStudy {
 		
 		if (result == true) {
 			student = C206_CaseStudy.randomID(newStudent);
-		    System.out.println("Your CCA registration ID: " + Student.getRegistrationId());
+		    System.out.println("Your CCA registration ID: " + student.getRegistrationId());
 			System.out.println("Registration successful!");
 		} else {
 			System.out.println("Registration unsucessful, you must include all details!");
