@@ -103,6 +103,7 @@ public class C206_CaseStudy {
 
 						} else if (choice == 9) {
 							// Add Student
+							C206_CaseStudy.AddStudent(studentList);
 						} else if (choice == 10) {
 							// View Student
 						} else if (choice == 11) {
@@ -473,6 +474,55 @@ public class C206_CaseStudy {
 				"REGISTRATION ID");
 		output += retrieveCCAStudent(studentList);
 		System.out.println(output);
+	}
+	
+	private static void AddStudent(ArrayList<Student> studentList) {///////////ADD
+		int id = Helper.readInt("Enter student ID > ");
+		String name = Helper.readString("Enter student name > ");
+		String grade = Helper.readString("Enter student grade > ");
+		String className = Helper.readString("Enter class name > ");
+		String classroomTeacher = Helper.readString("Enter teacher's name > ");
+		
+		Student newStudent = new Student(id, name, grade, className, classroomTeacher);
+		
+		boolean result = C206_CaseStudy.addStudent(studentList, newStudent);
+		
+		if (result == true) {
+			Student = C206_CaseStudy.randomID(newStudent);
+		    System.out.println("Your CCA registration ID: " + Student.getRegistrationId());
+			System.out.println("Registration successful!");
+		} else {
+			System.out.println("Registration unsucessful, you must include all details!");
+		}
+	}
+	
+	public static Student randomID(Student student) {//////////////////////////////////ADD
+	        String randPassword = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+	        String reset = "";
+	        Random rand = new Random();
+	        for (int i = 0; i < 5; i++) { // make it to 5 characters
+	            int outcome = rand.nextInt(62);
+	            char output = randPassword.charAt(outcome);
+	            reset += output;
+	        }
+	            reset = String.format("%s", reset);
+	            student.setRegistrationId(reset);
+
+	        return student;
+	    }
+	
+	public static boolean addStudent(ArrayList<Student> studentList, Student student) { ////////////////////////ADD
+		
+		if (student.getName().isEmpty()&& student.getGrade().isEmpty()
+			    && student.getClassName().isEmpty() && student.getClassroomTeacher().isEmpty())
+			  {
+			   return false;
+			  }
+			  else 
+			  {
+			   studentList.add(student);
+			   return true;
+			  }
 	}
 
 }
