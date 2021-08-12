@@ -489,7 +489,7 @@ public class C206_CaseStudy {
 		boolean result = C206_CaseStudy.addStudent(studentList, newStudent);
 		
 		if (result == true) {
-			String student = C206_CaseStudy.randomID(newStudent);
+			student student = C206_CaseStudy.randomID(newStudent);
 		    System.out.println("Your CCA registration ID: " + student.getRegistrationId());
 			System.out.println("Registration successful!");
 		} else {
