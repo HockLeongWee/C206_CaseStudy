@@ -123,7 +123,7 @@ public class C206_CaseStudy {
 						}
 					}
 				} else {
-					System.out.println("Invalid password! \n");
+					System.out.println("Login failed! \n");
 				}
 			} else if (option == 4) {
 				System.out.println("BYE");
