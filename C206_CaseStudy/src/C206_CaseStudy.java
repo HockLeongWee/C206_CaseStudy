@@ -107,8 +107,10 @@ public class C206_CaseStudy {
 							C206_CaseStudy.AddStudent(studentList);
 						} else if (choice == 10) {
 							// View Student
+							C206_CaseStudy.ViewStudent(studentList);/////////////////////////VIEW
 						} else if (choice == 11) {
 							// Delete Student
+							C206_CaseStudy.DeleteStudent(studentList);//////////////////////////DELETE
 						} else if (choice == 12) {
 							// Add Student to CCA
 						} else if (choice == 13) {
@@ -512,7 +514,7 @@ public class C206_CaseStudy {
 	        return student;
 	    }
 	
-	public static boolean addStudent(ArrayList<student> studentList, student student) { ////////////////////////ADD
+	public static boolean addStudent(ArrayList<student> studentList, student student) { ////////////////////////////ADD
 		
 		if (student.getName().isEmpty()&& student.getGrade().isEmpty()
 			    && student.getClassName().isEmpty() && student.getClassroomTeacher().isEmpty())
@@ -525,5 +527,83 @@ public class C206_CaseStudy {
 			   return true;
 			  }
 	}
+	
+	private static void ViewStudent(ArrayList<student> studentList) {////////////////////////VIEW
+		String allStudentList = C206_CaseStudy.scheduleListToString(studentList);
+		System.out.println(allStudentList);
+		System.out.println("Total number of students registered: " + C206_CaseStudy.getNumStudent(studentList));
+	}
+	
+    public static String scheduleListToString(ArrayList<student> studentList) {/////////////////////////////////////////////////VIEW
+		
+		String output = String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE", "CLASS NAME", "CLASSROOM TEACHER");
+		for (int i = 0; i < studentList.size(); i++) {
 
+			output += String.format("%-15s %-20s %-20s %-20s %-20s \n", studentList.get(i).getId(), studentList.get(i).getName(), studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+					studentList.get(i).getClassroomTeacher());
+		}
+		return output;
+	}
+    
+    public static int getNumStudent(ArrayList<student> studentList) {////////////////////////////////////////////////VIEW
+		return studentList.size();
+	}
+    
+    private static void DeleteStudent(ArrayList<student> studentList) {///////////////////////////////DELETE
+		int deleteStudentId = Helper.readInt("Enter student ID > ");
+
+		String studentDetails = C206_CaseStudy.getStudentById(studentList, deleteStudentId);
+
+		if (!studentList.isEmpty()) {
+			System.out.println(studentDetails);
+			char toDelete = Helper.readChar("Do you wish to delete this student?(y/n) > ");
+
+			if (toDelete == 'y') {
+				boolean deleted = C206_CaseStudy.removeStudent(studentList, deleteStudentId);
+
+				if (deleted == true) {
+					System.out.println(String.format("Student %s was deleted successfully.",
+							deleteStudentId));
+				} else {
+					System.out.println("Something went wrong, student was not deleted.");
+				}
+			}
+		}
+	}
+    
+    public static String getStudentById(ArrayList<student> studentList, int studentId) {////////////////////DELETE
+
+		String output = "";
+
+		for (int i = 0; i < studentList.size(); i++) {
+			student sl = studentList.get(i);
+
+			if (sl.getId() == studentId) {
+				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE",
+						"CLASS NAME", "CLASSROOM TEACHER");
+				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", sl.getId(),
+						sl.getName(), sl.getGrade(), sl.getClassName(), sl.getClassroomTeacher());
+				
+			}
+		}
+		return output;
+	}
+    
+    public static boolean removeStudent(ArrayList<student> studentList, int studentId) {/////////////////////DELETE
+    	
+    	boolean isChecked = false;
+		
+		for (int i = 0; i < studentList.size(); i++) 
+		{
+			student a = studentList.get(i);
+			if (a.getId() == studentId) 
+			{
+				studentList.remove(i);
+				isChecked = true;
+				break;
+			}
+		}
+		return isChecked;
+	}
+	
 }
