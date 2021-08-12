@@ -199,7 +199,7 @@ public class C206_CaseStudy {
 		System.out.println("14. QUIT");
 	}
 
-	public static void viewAllCCACategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
+	public static String viewAllCCACategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
 		String output = "";
 		output += String.format("%3s %-5s %-10s\n", "No.", "ID", "NAME");
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -207,6 +207,7 @@ public class C206_CaseStudy {
 					categoryList.get(i).getCategoryName());
 		}
 		System.out.println(output);
+		return output; 	
 	}
 
 	public static void insertCategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
