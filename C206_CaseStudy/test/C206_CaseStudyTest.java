@@ -11,6 +11,12 @@ public class C206_CaseStudyTest {
 	private student s1;
 	private student s2;
 	
+	private CategoryCCA category1;
+	private CategoryCCA category2;
+	private ArrayList<CategoryCCA> categoryList = new ArrayList<CategoryCCA>();
+	private CategoryCCA string;
+	private String categoryName;
+	
 	
 	private ArrayList<student> studentList;
 
@@ -21,6 +27,10 @@ public class C206_CaseStudyTest {
 		s2 = new student(20358305, "Srinivas", "P2", "W64J", "Julia");
 		
 		studentList = new ArrayList<student>();
+		
+		category1 = new CategoryCCA("Sports", 1);
+		category2 = new CategoryCCA("Science", 2);
+		string = new CategoryCCA("Game", 3);
 	}
 
 
@@ -94,4 +104,49 @@ public class C206_CaseStudyTest {
 //		assertEquals("Test that ViewAllstudentlist", testOutput, allstudent);
 //		
 //	}
+	
+	@Test
+	public void insertCategoryTest() {
+		assertNotNull("Check if there is valid CategoryCCA arraylist to add to", categoryList);
+		
+		categoryList.add(category1);
+		assertEquals("Check that CategoryCCA arraylist size is 1", 1, categoryList.size());
+		assertSame("Check that Category is added", category1, categoryList.get(0));
+		
+		categoryList.add(category2);
+		assertEquals("Check that CategoryCCA arraylist size is 2", 2, categoryList.size());
+		assertSame("Check that Category is added", category2, categoryList.get(1));
+	}
+	
+	@Test
+	public void viewAllCCACategoryTest() {
+		assertNotNull("Check if there is valid CategoryCCA arraylist to view", categoryList);
+		
+		categoryList.add(category1);
+		assertEquals("Check that CategoryCCA arraylist size is 1", 1, categoryList.size());
+		assertSame("Check that Category is added", category1, categoryList.get(0));
+		
+		assertFalse("Check if CategoryCCA arraylist is has null values", categoryList.isEmpty());
+		
+		String allCCACategory = "";
+		String output = "";
+		
+		allCCACategory = C206_CaseStudy.viewAllCCACategory(categoryList);
+		output = String.format("%3s %-5s %-10s\n", "No.", "ID", "NAME");
+		output += String.format("%-3d %-5d %-10s\n", 1, 1, "Sports");
+		
+		assertEquals("Check that CategoryCCA arraylist size is 1", output, allCCACategory);
+	}
+	
+	@Test
+	public void deleteCategoryTest() {
+		assertNotNull("Check if there is valid CategoryCCA arraylist to view", categoryList);
+		
+		categoryList.add(category1);
+		assertEquals("Check that CategoryCCA arraylist size is 1", 1, categoryList.size());
+		assertSame("Check that Category is added", category1, categoryList.get(0));
+		
+		categoryList.remove(category1);
+		assertTrue("Check that CategoryCCA arraylist is empty", categoryList.isEmpty());
+	}
 }
