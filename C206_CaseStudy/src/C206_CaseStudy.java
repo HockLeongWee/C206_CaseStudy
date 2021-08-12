@@ -476,7 +476,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
-	private static void AddStudent(ArrayList<Student> studentList) {///////////ADD
+	private static void AddStudent(ArrayList<student> studentList) {///////////ADD
 		int id = Helper.readInt("Enter student ID > ");
 		String name = Helper.readString("Enter student name > ");
 		String grade = Helper.readString("Enter student grade > ");
@@ -496,7 +496,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	public static Student randomID(Student student) {//////////////////////////////////ADD
+	public static student randomID(student student) {//////////////////////////////////ADD
 	        String randPassword = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
 	        String reset = "";
 	        Random rand = new Random();
@@ -511,7 +511,7 @@ public class C206_CaseStudy {
 	        return student;
 	    }
 	
-	public static boolean addStudent(ArrayList<Student> studentList, Student student) { ////////////////////////ADD
+	public static boolean addStudent(ArrayList<student> studentList, student student) { ////////////////////////ADD
 		
 		if (student.getName().isEmpty()&& student.getGrade().isEmpty()
 			    && student.getClassName().isEmpty() && student.getClassroomTeacher().isEmpty())
