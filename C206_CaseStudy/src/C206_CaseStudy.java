@@ -45,8 +45,9 @@ public class C206_CaseStudy {
 			if (option == 1) {
 
 				// Write Code on creating parents account with student information
-				Parent parent = newParent();
-				C206_CaseStudy.addParent(parentList, parent);
+				String registerID = "";
+		        Parent parent = newParent(studentList, registerID);
+		        C206_CaseStudy.addParent(parentList, parent, studentList);
 
 				// Also add student into the student array list when parents registering with
 				// the student information
@@ -275,31 +276,63 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	public static Parent newParent() { // Hermione
-		String name = Helper.readString("Enter name > ");
-		String email = Helper.readString("Enter email > ");
-		int mobile = Helper.readInt("Enter contact no. > ");
-		int studentID = Helper.readInt("Enter child's student ID > ");
-		String studentName = Helper.readString("Enter child's name > ");
-		String grade = Helper.readString("Enter child's grade > ");
-		String classroom = Helper.readString("Enter child's class > ");
-		String teacher = Helper.readString("Enter classroom teacher's name > ");
+	public static Parent newParent(ArrayList<student> studentList, String registerID) { // Hermione
+	    String name = Helper.readString("Enter name > ");
+	    String email = Helper.readString("Enter email > ");
+	    int mobile = Helper.readInt("Enter contact no. > ");
+	    int studentID = Helper.readInt("Enter child's student ID > ");
+	    String studentName = Helper.readString("Enter child's name > ");
+	    String grade = Helper.readString("Enter child's grade > ");
+	    String classroom = Helper.readString("Enter child's class > ");
+	    String teacher = Helper.readString("Enter classroom teacher's name > ");
 
-		String ccaRegisterID = "1234c"; // Once the CCA registration thing done do change this hardcoded one
+	    String ccaRegisterID = C206_CaseStudy.randomIdGenerator(studentList, registerID);
 
-		Parent parent = new Parent(name, ccaRegisterID, email, mobile, studentID, studentName, grade, classroom,
-				teacher);
-		System.out.println("Your CCA Resgistration ID is " + ccaRegisterID);
-		return parent;
+	    Parent parent = new Parent(name, ccaRegisterID, email, mobile, studentID, studentName, grade, classroom,
+	        teacher);
+	    System.out.println("Your CCA Resgistration ID is " + ccaRegisterID);
+	    return parent;
 
+	  }
+	
+	public static boolean checkStudent(ArrayList<Parent> parentList, ArrayList<student> studentList, String name, int studentID) { // Hermione
+		for (int i = 0; i < studentList.size(); i++) {
+			if (name.equalsIgnoreCase(studentList.get(i).getName()) && studentID == studentList.get(i).getId()) {
+				return true;
+			}
+		}
+		return false;
 	}
+	  
+	public static String randomIdGenerator(ArrayList<student> studentList, String registerID) { // Hermione
+		String letters = "abcdefghijklmnopqrstuvwxyz";
+	    String uniqueID = "";
+	    
+	    Random r = new Random();
+	    
+	      int number = r.nextInt((9999 - 1000) + 1) + 1000;
+	      uniqueID = number + letters.charAt(r.nextInt(letters.length())) + "";
+	      
+	    for (int j = 0; j < studentList.size(); j ++) {
+	        if (uniqueID.equalsIgnoreCase(studentList.get(j).getRegistrationId())) {
+	          uniqueID = "";
+	          continue;
+	        }
+	    }
+	    return uniqueID;
+	  
+	  }
 
-	public static void addParent(ArrayList<Parent> parentList, Parent parent) { // Hermione
-		
-			parentList.add(parent);
-			System.out.println("Parent added");
-		
-	}
+	public static void addParent(ArrayList<Parent> parentList, Parent parent, ArrayList<student> studentList) { // Hermione
+	    
+	    if (C206_CaseStudy.checkStudent(parentList, studentList, parent.getStudentName(), parent.getStudentID()) == true) {
+	      parentList.add(parent);
+	      System.out.println("Parent added.\n");
+	    } else {
+	      System.out.println("No student found.\n");
+	    }
+	  
+	  }
 
 	public static boolean doDeleteParent(ArrayList<Parent> parentList, String name, int studentID) { // Hermione
 
