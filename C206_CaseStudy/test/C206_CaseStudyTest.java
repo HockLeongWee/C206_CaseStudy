@@ -17,6 +17,10 @@ public class C206_CaseStudyTest {
 	private CategoryCCA string;
 	private String categoryName;
 	
+	private CCA cca1;
+	private CCA cca2;
+	
+	private ArrayList<CCA> listofCCAs = new ArrayList<CCA>();
 	
 	private ArrayList<student> studentList;
 
@@ -165,5 +169,41 @@ public class C206_CaseStudyTest {
 		assertFalse("Check that CategoryCCA arraylist is empty", categoryList.isEmpty());
 		assertSame("Check that Category is added", category2, categoryList.get(0));
 
+	}
+	
+	@Test
+	public void addCCATest() {
+		assertNotNull("Check if there is valid cca arraylist to add to", listofCCAs);
+
+		listofCCAs.add(cca1);
+		assertEquals("Check that CCA arraylist size is 1", 1, listofCCAs.size());
+		assertSame("Check that CCA is added", cca1, listofCCAs.get(0));
+		
+		listofCCAs.add(cca2);
+		assertEquals("Check that CCA arraylist size is 2", 2, listofCCAs.size());
+		assertSame("Check that CCA is added", cca2, listofCCAs.get(1));
+	}
+	
+	@Test
+	public void viewCCATest() {
+		assertNotNull("Check if there is valid CCA arraylist to view", listofCCAs);
+		
+		listofCCAs.add(cca1);
+		assertEquals("Check that CCA arraylist size is 1", 1, listofCCAs.size());
+		assertSame("Check that CCA is added", cca1, listofCCAs.get(0));
+		
+		assertFalse("Check if CCA arraylist has null values", listofCCAs.isEmpty());
+	}
+	
+	@Test
+	public void deleteCCATest() {
+		assertNotNull("Check if there is valid CCA arraylist", listofCCAs);
+		
+		listofCCAs.add(cca1);
+		assertEquals("Check that CCA arraylist size is 1", 1, listofCCAs.size());
+		assertSame("Check that CCA is added", cca1, listofCCAs.get(0));
+		
+		listofCCAs.remove(cca1);
+		assertTrue("Check that CCA arraylist is empty", listofCCAs.isEmpty());
 	}
 }
