@@ -55,16 +55,24 @@ public class C206_CaseStudy {
 				// Write code for log in with student id & registration id
 				boolean loged = parentLoginSystem(parentList);
 				if (loged) {
-					// Write code for view all category
-					C206_CaseStudy.viewAllCCACategory(categoryList); // Show Category
-					// Write code to allow user to select a category
-					// Write code for view all CCA related to the category
-					C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
-
-					// Write code to add student to CCA - By Jun Long
-					C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList);
-					// Write code to view student that's added to the CCA - By Jun Long NOT IZZAT
-
+					// Write code to view student that's added to the CCA - By Izzat
+					while (choice != 3) {
+						C206_CaseStudy.studentInstructor();
+						choice = Helper.readInt("Enter choice > ");
+						if (choice == 1) {
+							C206_CaseStudy.viewAllCCACategory(categoryList); // Show Categor
+							int id = C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
+							// Write code to add Student to CCA
+							C206_CaseStudy.addStudentToCCA(listofCCAs, parentList, studentList, id);
+						} else if (choice == 2) {
+							// Write code to view all CCA Category
+							C206_CaseStudy.dropStudentFromCCA(studentList, listofCCAs);
+						} else if (choice == 3) {
+							System.out.println("BYE");
+						} else {
+							System.out.println("Invalid choice");
+						}
+					}
 				}
 
 			} else if (option == 3) {
@@ -88,7 +96,7 @@ public class C206_CaseStudy {
 						} else if (choice == 4) {
 							C206_CaseStudy.updateCategory(categoryList);
 						} else if (choice == 5) {
-							
+
 							// Write code to add CCA with it's related Category
 							C206_CaseStudy.addCCA(listofCCAs, categoryList);
 						} else if (choice == 6) {
@@ -110,15 +118,15 @@ public class C206_CaseStudy {
 							C206_CaseStudy.AddStudent(studentList);
 						} else if (choice == 11) {
 							// View Student
-							C206_CaseStudy.ViewStudent(studentList);/////////////////////////VIEW
+							C206_CaseStudy.ViewStudent(studentList);///////////////////////// VIEW
 						} else if (choice == 12) {
 							// Delete Student
-							C206_CaseStudy.DeleteStudent(studentList);//////////////////////////DELETE
+							C206_CaseStudy.DeleteStudent(studentList);////////////////////////// DELETE
 						} else if (choice == 13) {
 							// Add Student to CCA
 						} else if (choice == 14) {
 							// View Registered Student
-							C206_CaseStudy.viewStudentOfCCa(studentList);
+							C206_CaseStudy.viewStudentOfCCa(studentList, listofCCAs);
 						} else if (choice == 15) {
 							System.out.println("BYE");
 						} else {
@@ -145,28 +153,6 @@ public class C206_CaseStudy {
 		System.out.println("Enter 2 to Login for CCA Registration");
 		System.out.println("Enter 3 to Login for CCA Instructors / Coordinators");
 		Helper.line(50, "-");
-	}
-
-	public static boolean parentLoginSystem(ArrayList<Parent> parentList) { // done by Jun Long
-		System.out.println("WELCOME");
-		int studentID = Helper.readInt("Enter your student ID > ");
-		String ccaID = Helper.readString("Enter your CCA registration ID > ");
-		String output = "";
-		boolean isValid = false;
-		for (int i = 0; i < parentList.size(); i++) {
-			if (parentList.get(i).getStudentID() == (studentID) && parentList.get(i).getRegisterID().equals(ccaID)) {
-				output += String.format("Login successfully for student ID %d\n", studentID);
-				isValid = true;
-				break;
-			} else {
-				output += String.format("Login failed for student ID %d\n", studentID);
-				isValid = false;
-				break;
-			}
-		}
-		System.out.println(output);
-		return isValid;
-
 	}
 
 	public static void ccaInstructor() { // done by Hock Leong
@@ -211,7 +197,7 @@ public class C206_CaseStudy {
 					categoryList.get(i).getCategoryName());
 		}
 		System.out.println(output);
-		return output; 	
+		return output;
 	}
 
 	public static void insertCategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
@@ -266,21 +252,23 @@ public class C206_CaseStudy {
 		String newCategoryName = Helper.readString("The new Category Name you want to change to > ");
 		int newCategoryID = Helper.readInt("New Category ID > ");
 		String output = "";
-		
-		if(categoryName.equalsIgnoreCase(null) == false && newCategoryName.equalsIgnoreCase(null) == false) {
-			for(int i = 0; i < categoryList.size(); i++) {
-				if(categoryName.equalsIgnoreCase(categoryList.get(i).getCategoryName())) {
+
+		if (categoryName.equalsIgnoreCase(null) == false && newCategoryName.equalsIgnoreCase(null) == false) {
+			for (int i = 0; i < categoryList.size(); i++) {
+				if (categoryName.equalsIgnoreCase(categoryList.get(i).getCategoryName())) {
 					categoryList.remove(i);
 					CategoryCCA updatedCategory = new CategoryCCA(newCategoryName, newCategoryID);
 					categoryList.add(i, updatedCategory);
 					output = "Sucessfully Updated!";
 					break;
-				}else {
+				} else {
 					output += "Can't find Category Name";
 				}
-			}System.out.println(output);
+			}
+			System.out.println(output);
 		}
 	}
+
 	public static void setHeader(String header) { // Hermione
 		Helper.line(80, "-");
 		System.out.println(header);
@@ -431,9 +419,8 @@ public class C206_CaseStudy {
 			System.out.println("Invalid CCA name");
 		}
 	}
-	
 
-	public static void viewAllRelatedCCAs(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // Done by
+	public static int viewAllRelatedCCAs(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // Done by
 																											// Hock
 																											// Leong
 		int id = Helper.readInt("Enter the id you want to select > "); // Choose Category
@@ -449,133 +436,79 @@ public class C206_CaseStudy {
 			}
 		}
 		System.out.println(output);
+		return id;
 	}
 
-	public static void addStudentToCCA(ArrayList<CCA> CCAList, ArrayList<Parent> pParentList,
-			ArrayList<student> studentList) { // Done by Jun Long
-		Helper.line(50, "-");
-		System.out.println("ADD STUDENT");
-		String studentName = Helper.readString("Enter the student name > ");
-		String studentClassRoom = Helper.readString("Enter the student class room > ");
-		String ccaName = Helper.readString("Enter the CCA > ");
-		boolean ccaExist = false;
-		CCA cca = null;
-		// getting CCA whose name is our given CCA
-		for (int i = 0; i < CCAList.size(); i++) {
-			if (ccaName.equalsIgnoreCase(CCAList.get(i).getName())) {
-
-				cca = CCAList.get(i);
-			}
-		}
-		// getting student details from parents by providing student name
-		Parent lParent = null;
-		for (int i = 0; i < pParentList.size(); i++) {
-			if (studentName.equalsIgnoreCase(pParentList.get(i).getStudentName())) {
-
-				lParent = pParentList.get(i);
-			}
-		}
-		// add the student which and note we get all student details from cca and parent
-		if (lParent != null && cca != null) {
-			studentList.add(new student(cca.getCategordID(), lParent.getStudentName(), (lParent.getGrade() + ""),
-					studentClassRoom, lParent.getTeacher(), (lParent.getStudentID() + "")));
-			System.out.println("Student Added!");
-		} else
-			System.out.println("Student not added! As there is no student registed with that name.");
-
-	}
-
-	public static String retrieveCCAStudent(ArrayList<student> studentList) { // Done by Jun Long
-		String output = "";
-
-		for (int i = 0; i < studentList.size(); i++) {
-			if (studentList.get(i).getId() == 1 || studentList.get(i).getId() == 2)
-				output += String.format("%-15s %-20s %-15s %-15s %-15s\n", studentList.get(i).getName(),
-						studentList.get(i).getGrade(), studentList.get(i).getClassName(),
-						studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId());
-		}
-		return output;
-	}
-
-	private static void viewStudentOfCCa(ArrayList<student> studentList) { // Done by Jun Long
-		C206_CaseStudy.setHeader("CCA Added Students");
-		String output = String.format("%-15s %-20s %-15s %-15s %-15s\n", "STUDENT NAME", "GRADE", "CLASS", "TEACHER",
-				"REGISTRATION ID");
-		output += retrieveCCAStudent(studentList);
-		System.out.println(output);
-	}
-	
-	private static void AddStudent(ArrayList<student> studentList) {///////////ADD
+	private static void AddStudent(ArrayList<student> studentList) {/////////// ADD
 		int id = Helper.readInt("Enter student ID > ");
 		String name = Helper.readString("Enter student name > ");
 		String grade = Helper.readString("Enter student grade > ");
 		String className = Helper.readString("Enter class name > ");
 		String classroomTeacher = Helper.readString("Enter teacher's name > ");
-		
+
 		student newStudent = new student(id, name, grade, className, classroomTeacher);
-		
+
 		boolean result = C206_CaseStudy.addStudent(studentList, newStudent);
-		
+
 		if (result == true) {
 			student student = C206_CaseStudy.randomID(newStudent);
-		    System.out.println("Your CCA registration ID: " + student.getRegistrationId());
+			System.out.println("Your CCA registration ID: " + student.getRegistrationId());
 			System.out.println("Registration successful!");
 		} else {
 			System.out.println("Registration unsucessful, you must include all details!");
 		}
 	}
-	
-	public static student randomID(student student) {//////////////////////////////////ADD
-	        String randPassword = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
-	        String reset = "";
-	        Random rand = new Random();
-	        for (int i = 0; i < 5; i++) { // make it to 5 characters
-	            int outcome = rand.nextInt(62);
-	            char output = randPassword.charAt(outcome);
-	            reset += output;
-	        }
-	            reset = String.format("%s", reset);
-	            student.setRegistrationId(reset);
 
-	        return student;
-	    }
-	
-	public static boolean addStudent(ArrayList<student> studentList, student student) { ////////////////////////////ADD
-		
-		if (student.getName().isEmpty()&& student.getGrade().isEmpty()
-			    && student.getClassName().isEmpty() && student.getClassroomTeacher().isEmpty())
-			  {
-			   return false;
-			  }
-			  else 
-			  {
-			   studentList.add(student);
-			   return true;
-			  }
+	public static student randomID(student student) {////////////////////////////////// ADD
+		String randPassword = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+		String reset = "";
+		Random rand = new Random();
+		for (int i = 0; i < 5; i++) { // make it to 5 characters
+			int outcome = rand.nextInt(62);
+			char output = randPassword.charAt(outcome);
+			reset += output;
+		}
+		reset = String.format("%s", reset);
+		student.setRegistrationId(reset);
+
+		return student;
 	}
-	
-	private static void ViewStudent(ArrayList<student> studentList) {////////////////////////VIEW
+
+	public static boolean addStudent(ArrayList<student> studentList, student student) { //////////////////////////// ADD
+
+		if (student.getName().isEmpty() && student.getGrade().isEmpty() && student.getClassName().isEmpty()
+				&& student.getClassroomTeacher().isEmpty()) {
+			return false;
+		} else {
+			studentList.add(student);
+			return true;
+		}
+	}
+
+	private static void ViewStudent(ArrayList<student> studentList) {//////////////////////// VIEW
 		String allStudentList = C206_CaseStudy.scheduleListToString(studentList);
 		System.out.println(allStudentList);
 		System.out.println("Total number of students registered: " + C206_CaseStudy.getNumStudent(studentList));
 	}
-	
-    public static String scheduleListToString(ArrayList<student> studentList) {/////////////////////////////////////////////////VIEW
-		
-		String output = String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE", "CLASS NAME", "CLASSROOM TEACHER");
+
+	public static String scheduleListToString(ArrayList<student> studentList) {///////////////////////////////////////////////// VIEW
+
+		String output = String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE", "CLASS NAME",
+				"CLASSROOM TEACHER");
 		for (int i = 0; i < studentList.size(); i++) {
 
-			output += String.format("%-15s %-20s %-20s %-20s %-20s \n", studentList.get(i).getId(), studentList.get(i).getName(), studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+			output += String.format("%-15s %-20s %-20s %-20s %-20s \n", studentList.get(i).getId(),
+					studentList.get(i).getName(), studentList.get(i).getGrade(), studentList.get(i).getClassName(),
 					studentList.get(i).getClassroomTeacher());
 		}
 		return output;
 	}
-    
-    public static int getNumStudent(ArrayList<student> studentList) {////////////////////////////////////////////////VIEW
+
+	public static int getNumStudent(ArrayList<student> studentList) {//////////////////////////////////////////////// VIEW
 		return studentList.size();
 	}
-    
-    private static void DeleteStudent(ArrayList<student> studentList) {///////////////////////////////DELETE
+
+	private static void DeleteStudent(ArrayList<student> studentList) {/////////////////////////////// DELETE
 		int deleteStudentId = Helper.readInt("Enter student ID > ");
 
 		String studentDetails = C206_CaseStudy.getStudentById(studentList, deleteStudentId);
@@ -588,16 +521,15 @@ public class C206_CaseStudy {
 				boolean deleted = C206_CaseStudy.removeStudent(studentList, deleteStudentId);
 
 				if (deleted == true) {
-					System.out.println(String.format("Student %s was deleted successfully.",
-							deleteStudentId));
+					System.out.println(String.format("Student %s was deleted successfully.", deleteStudentId));
 				} else {
 					System.out.println("Something went wrong, student was not deleted.");
 				}
 			}
 		}
 	}
-    
-    public static String getStudentById(ArrayList<student> studentList, int studentId) {////////////////////DELETE
+
+	public static String getStudentById(ArrayList<student> studentList, int studentId) {//////////////////// DELETE
 
 		String output = "";
 
@@ -605,25 +537,23 @@ public class C206_CaseStudy {
 			student sl = studentList.get(i);
 
 			if (sl.getId() == studentId) {
-				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE",
-						"CLASS NAME", "CLASSROOM TEACHER");
-				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", sl.getId(),
-						sl.getName(), sl.getGrade(), sl.getClassName(), sl.getClassroomTeacher());
-				
+				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", "ID", "NAME", "GRADE", "CLASS NAME",
+						"CLASSROOM TEACHER");
+				output += String.format("%-15s %-20s %-20s %-20s %-20s \n", sl.getId(), sl.getName(), sl.getGrade(),
+						sl.getClassName(), sl.getClassroomTeacher());
+
 			}
 		}
 		return output;
 	}
-    
-    public static boolean removeStudent(ArrayList<student> studentList, int studentId) {/////////////////////DELETE
-    	
-    	boolean isChecked = false;
-		
-		for (int i = 0; i < studentList.size(); i++) 
-		{
+
+	public static boolean removeStudent(ArrayList<student> studentList, int studentId) {///////////////////// DELETE
+
+		boolean isChecked = false;
+
+		for (int i = 0; i < studentList.size(); i++) {
 			student a = studentList.get(i);
-			if (a.getId() == studentId) 
-			{
+			if (a.getId() == studentId) {
 				studentList.remove(i);
 				isChecked = true;
 				break;
@@ -631,5 +561,211 @@ public class C206_CaseStudy {
 		}
 		return isChecked;
 	}
-	
+
+	public static String retrieveCCAStudent(ArrayList<student> studentList) { // Done by Jun Long
+		String output = "";
+
+		for (int i = 0; i < studentList.size(); i++) {
+
+			output += String.format("%-15s %-20s %-15s %-15s %-15s\n", studentList.get(i).getName(),
+					studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+					studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId());
+
+		}
+		return output;
+	}
+
+	private static void viewStudentOfCCa(ArrayList<student> studentList) { // Done by Jun Long
+		C206_CaseStudy.setHeader("CCA Added Students");
+		String output = String.format("%-15s %-20s %-15s %-15s %-15s\n", "STUDENT NAME", "GRADE", "CLASS", "TEACHER",
+				"REGISTRATION ID");
+		output += retrieveCCAStudent(studentList);
+		System.out.println(output);
+	}
+
+	public static int numberStudent(ArrayList<student> CCAList, int id) {// Done by Jun Long
+		int count = 0;
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (CCAList.get(i).getId() == id) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static String retrieveCCAStudent(ArrayList<student> studentList, ArrayList<CCA> CCAList) { // Done by Jun
+																										// Long
+		String output = "";
+
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getId() < CCAList.size()) {
+				int no = numberStudent(studentList, studentList.get(i).getId());
+				output += String.format("%-15s %-20s %-15s %-15s %-15s      %-15s      %-15s\n",
+						studentList.get(i).getName(), studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+						studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId(),
+						no + "/" + CCAList.get(studentList.get(i).getId()).getClasssize() + " students",
+						CCAList.get(studentList.get(i).getId()).getName());
+			}
+
+		}
+		return output;
+	}
+
+	public static void viewStudentOfCCa(ArrayList<student> studentList, ArrayList<CCA> CCAList) { // Done by Jun Long
+		C206_CaseStudy.setHeader("CCA Added Students");
+		String output = String.format("%-15s %-20s %-15s %-15s %-15s      %-15s      %-15s\n", "STUDENT NAME", "GRADE",
+				"CLASS", "TEACHER", "REGISTRATION ID", "No of Students", "CCA Student In");
+		String temp = retrieveCCAStudent(studentList, CCAList);
+		if (!temp.isEmpty()) {
+			output += temp;
+			System.out.println(output);
+		} else {
+			System.out.println("There is no any register student in CCA");
+		}
+
+	}
+
+	public static void studentInstructor() { // Done by Maqisha
+		System.out.println("WELCOME");
+		System.out.println("============================");
+		System.out.println("CCA Student Registration");
+		System.out.println("============================");
+		System.out.println("1. Add Student into CCA");
+		System.out.println("2. Drop Student from CCA");
+		System.out.println("3. QUIT");
+	}
+
+	public static void dropStudentFromCCA(ArrayList<student> studentList, ArrayList<CCA> listofCCAs) { // Done by
+																										// Jun Long
+		String name = Helper.readString("Enter Student ID > ");
+		boolean exist = false;
+		if (name.equalsIgnoreCase(null) == false) {
+			for (int i = 0; i < studentList.size(); i++) {
+
+				if (name.equalsIgnoreCase(studentList.get(i).getRegistrationId())) {
+					boolean flag = true;
+					exist = true;
+					viewStudentCCAs(listofCCAs, studentList.get(i).getId());
+					while (flag) {
+						System.out.println("1. Drop CCA");
+						System.out.println("2. Exit");
+						int choice = Helper.readInt("Enter choice > ");
+						if (choice == 1) {
+							dropStudent(studentList, listofCCAs, i);
+							flag = false;
+						}
+						if (choice == 2) {
+							flag = false;
+						}
+					}
+
+				}
+			}
+		}
+		if (!exist) {
+			System.out.println("There is no student regsitered with the student ID!");
+		}
+	}
+
+	public static void dropStudent(ArrayList<student> studentList, ArrayList<CCA> listofCCAs, int i) {// Done by Jun
+																										// Long
+		String choice = Helper.readString(" Are you sure you want to drop your child from this CCA?");
+		if (choice.equalsIgnoreCase("yes")) {
+			System.out.println(studentList.get(i).getName() + " dropped successfully from "
+					+ listofCCAs.get(studentList.get(i).getId()).getName()
+					+ ". And the student will be removed from the CCA.");
+			studentList.remove(i);
+		} else if (choice.equalsIgnoreCase("no")) {
+			System.out.println(studentList.get(i).getName() + "failed to dropped from "
+					+ listofCCAs.get(studentList.get(i).getId())
+					+ ". And the student will not be removed from the CCA.");
+		}
+	}
+
+	public static void viewStudentCCAs(ArrayList<CCA> listofCCAs, int catID) {// Done by Jun Long
+		Helper.line(40, "-");
+
+		String output = "";
+		output += String.format("%-15s %-40s %-5s %-5s %-10s %-15s %-15s\n", "CCA Name", "Description", "Class Size",
+				"Day of the week", "Time", "Venue", "Instructor Name");
+
+		output += String.format("%-15s %-40s %-5d %-5s %-10s %-15s %-15s\n", listofCCAs.get(catID).getName(),
+				listofCCAs.get(catID).getDescription(), listofCCAs.get(catID).getClasssize(),
+				listofCCAs.get(catID).getDayoftheweek(), listofCCAs.get(catID).getTime(),
+				listofCCAs.get(catID).getVenue(), listofCCAs.get(catID).getInstructorname());
+
+		System.out.println(output);
+	}
+
+	public static boolean parentLoginSystem(ArrayList<Parent> parentList) { // Done by Jun Long
+		System.out.println("WELCOME");
+		int studentID = Helper.readInt("Enter your student ID > ");
+		String ccaID = Helper.readString("Enter your CCA registration ID > ");
+		String output = "";
+		boolean isValid = false;
+		for (int i = 0; i < parentList.size(); i++) {
+			if (parentList.get(i).getStudentID() == (studentID) && parentList.get(i).getRegisterID().equals(ccaID)) {
+				output += "Login successfully for student ID " + studentID + " and registration ID " + ccaID + " \n";
+				isValid = true;
+				break;
+			} else if (parentList.get(i).getStudentID() == (studentID)) {
+				output = "Login Failed as the CCA Registration ID is invalid!\n";
+				isValid = false;
+				break;
+			} else if (parentList.get(i).getRegisterID().equals(ccaID)) {
+				output = "Login Failed as the Student ID is invalid!\n";
+				isValid = false;
+				break;
+			} else {
+				output = "Login Failed as both the Student ID and CCA Registration ID are invalid!\n";
+			}
+		}
+		System.out.println(output);
+		return isValid;
+
+	}
+
+	public static void addStudentToCCA(ArrayList<CCA> CCAList, ArrayList<Parent> pParentList,
+			ArrayList<student> studentList, int id) { // Done by Jun Long
+		Helper.line(50, "-");
+		System.out.println("ADD STUDENT");
+		String studentName = Helper.readString("Enter the student name > ");
+		String ccaName = Helper.readString("Enter the CCA > ");
+		int ccaId = -1;
+		boolean ccaExist = false;
+		CCA cca = null;
+
+		// getting CCA whose name is our given CCA
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (ccaName.equalsIgnoreCase(CCAList.get(i).getName()) && CCAList.get(i).getCategordID() == id) {
+				ccaId = i;
+				cca = CCAList.get(i);
+			}
+		}
+		// getting student details from parents by providing student name
+		Parent lParent = null;
+		for (int i = 0; i < pParentList.size(); i++) {
+			if (studentName.equalsIgnoreCase(pParentList.get(i).getStudentName())) {
+
+				lParent = pParentList.get(i);
+			}
+		}
+
+		// add the student which and note we get all student details from cca and parent
+		if (lParent != null && cca != null) {
+			studentList.add(new student(ccaId, lParent.getStudentName(), (lParent.getGrade() + ""),
+					lParent.getClassroom(), lParent.getTeacher(), (lParent.getStudentID() + "")));
+			System.out.println("Student Added");
+		} else if (studentName.isEmpty() && ccaName.isEmpty()) {
+			System.out.println("Add Failed! Please fill in everything!");
+		} else if (lParent == null && cca == null) {
+			System.out.println("Student not added! As there is no student registered with that name in the CCA");
+		} else if (lParent == null) {
+			System.out.println("Student not added! As there is no student registered with that name.");
+		} else if (cca == null) {
+			System.out.println("The CCA does not exist!");
+		}
+
+	}
+
 }
