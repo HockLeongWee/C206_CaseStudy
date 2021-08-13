@@ -46,7 +46,7 @@ public class C206_CaseStudy {
 
 				// Write Code on creating parents account with student information
 				Parent parent = newParent();
-				C206_CaseStudy.addParent(parentList, parent);
+				C206_CaseStudy.addParent(parentList, parent, studentList);
 
 				// Also add student into the student array list when parents registering with
 				// the student information
@@ -274,6 +274,19 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
+	
+	public static boolean checkStudent(ArrayList<Parent> parentList, ArrayList<student> studentList, String name, int studentID) {
+		
+		boolean isChecked = false;
+		
+		for (int i = 0; i < studentList.size(); i++) {
+			if (name.equalsIgnoreCase(studentList.get(i).getName()) && studentID == studentList.get(i).getId()) {
+				isChecked = true;
+			}
+		}
+		
+		return isChecked;
+	}
 
 	public static Parent newParent() { // Hermione
 		String name = Helper.readString("Enter name > ");
@@ -294,10 +307,15 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void addParent(ArrayList<Parent> parentList, Parent parent) { // Hermione
-
-		parentList.add(parent);
-		System.out.println("Parent added");
+	public static void addParent(ArrayList<Parent> parentList, Parent parent, ArrayList<student> studentList) { // Hermione
+		
+		if (C206_CaseStudy.checkStudent(parentList, studentList, parent.getStudentName(), parent.getStudentID()) == true) {
+			parentList.add(parent);
+			System.out.println("Parent added");
+		} else {
+			System.out.println("No student found.");
+		}
+	
 	}
 
 	public static boolean doDeleteParent(ArrayList<Parent> parentList, String name, int studentID) { // Hermione
