@@ -149,4 +149,21 @@ public class C206_CaseStudyTest {
 		categoryList.remove(category1);
 		assertTrue("Check that CategoryCCA arraylist is empty", categoryList.isEmpty());
 	}
+	
+	public void updateCategoryTest() {
+		assertNotNull("Check if there is valid CategoryCCA ARRAYLIST to view", categoryList);
+		
+		categoryList.add(category1);
+		assertEquals("Check that CategoryCCA arraylist size is 1", 1, categoryList.size());
+		
+		categoryList.remove(category1);
+		assertEquals("Check that CategoryCCA arraylist size is 0", 0, categoryList.size());
+		assertTrue("Check that CategoryCCA arraylist is empty", categoryList.isEmpty());
+		
+		categoryList.add(category2);
+		assertEquals("Check that CategoryCCA arraylist size is 1", 1, categoryList.size());
+		assertFalse("Check that CategoryCCA arraylist is empty", categoryList.isEmpty());
+		assertSame("Check that Category is added", category2, categoryList.get(0));
+
+	}
 }

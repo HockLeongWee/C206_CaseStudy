@@ -86,37 +86,40 @@ public class C206_CaseStudy {
 							// Write code to delete CCA Category
 							C206_CaseStudy.deleteCategory(categoryList);
 						} else if (choice == 4) {
+							C206_CaseStudy.updateCategory(categoryList);
+						} else if (choice == 5) {
+							
 							// Write code to add CCA with it's related Category
 							C206_CaseStudy.addCCA(listofCCAs, categoryList);
-						} else if (choice == 5) {
+						} else if (choice == 6) {
 							// View all CCA
 							C206_CaseStudy.viewCCAs(listofCCAs);
-						} else if (choice == 6) {
+						} else if (choice == 7) {
 							// Write code to delete CCA
 							C206_CaseStudy.deleteCCA(listofCCAs);
-						} else if (choice == 7) {
+						} else if (choice == 8) {
 							// Write code to view all registered parents
 							C206_CaseStudy.viewAllParent(parentList);
-						} else if (choice == 8) {
+						} else if (choice == 9) {
 							// Write code to delete parents account ONLY after making sure that child is
 							// registered. Else don't delete yet.
 							C206_CaseStudy.deleteParent(parentList);
 
-						} else if (choice == 9) {
+						} else if (choice == 10) {
 							// Add Student
 							C206_CaseStudy.AddStudent(studentList);
-						} else if (choice == 10) {
+						} else if (choice == 11) {
 							// View Student
 							C206_CaseStudy.ViewStudent(studentList);/////////////////////////VIEW
-						} else if (choice == 11) {
+						} else if (choice == 12) {
 							// Delete Student
 							C206_CaseStudy.DeleteStudent(studentList);//////////////////////////DELETE
-						} else if (choice == 12) {
-							// Add Student to CCA
 						} else if (choice == 13) {
+							// Add Student to CCA
+						} else if (choice == 14) {
 							// View Registered Student
 							C206_CaseStudy.viewStudentOfCCa(studentList);
-						} else if (choice == 14) {
+						} else if (choice == 15) {
 							System.out.println("BYE");
 						} else {
 							System.out.println("Invalid choice");
@@ -174,29 +177,30 @@ public class C206_CaseStudy {
 		System.out.println("1. Add a CCA Category");
 		System.out.println("2. View all CCA Category");
 		System.out.println("3. Delete a CCA Category");
+		System.out.println("4. Update a CCA Category");
 		System.out.println("============================");
 		System.out.println("CCA Category");
 		System.out.println("============================");
-		System.out.println("4. Add a CCA");
-		System.out.println("5. View all CCA");
-		System.out.println("6. Delete a CCA");
+		System.out.println("5. Add a CCA");
+		System.out.println("6. View all CCA");
+		System.out.println("7. Delete a CCA");
 		System.out.println("============================");
 		System.out.println("Parents");
 		System.out.println("============================");
-		System.out.println("7. View all registered parents");
-		System.out.println("8. Delete a parent account");
+		System.out.println("8. View all registered parents");
+		System.out.println("9. Delete a parent account");
 		System.out.println("============================");
 		System.out.println("Student");
 		System.out.println("============================");
-		System.out.println("9. Add Student");
-		System.out.println("10. View Student");
-		System.out.println("11. Delete Student");
+		System.out.println("10. Add Student");
+		System.out.println("11. View Student");
+		System.out.println("12. Delete Student");
 		System.out.println("============================");
 		System.out.println("Others");
 		System.out.println("============================");
-		System.out.println("12. Add Student to CCA");
-		System.out.println("13. View registered Student");
-		System.out.println("14. QUIT");
+		System.out.println("13. Add Student to CCA");
+		System.out.println("14. View registered Student");
+		System.out.println("15. QUIT");
 	}
 
 	public static String viewAllCCACategory(ArrayList<CategoryCCA> categoryList) { // Done By Hock Leong
@@ -257,6 +261,26 @@ public class C206_CaseStudy {
 		}
 	}
 
+	public static void updateCategory(ArrayList<CategoryCCA> categoryList) {
+		String categoryName = Helper.readString("Category Name that you want to change > ");
+		String newCategoryName = Helper.readString("The new Category Name you want to change to > ");
+		int newCategoryID = Helper.readInt("New Category ID > ");
+		String output = "";
+		
+		if(categoryName.equalsIgnoreCase(null) == false && newCategoryName.equalsIgnoreCase(null) == false) {
+			for(int i = 0; i < categoryList.size(); i++) {
+				if(categoryName.equalsIgnoreCase(categoryList.get(i).getCategoryName())) {
+					categoryList.remove(i);
+					CategoryCCA updatedCategory = new CategoryCCA(newCategoryName, newCategoryID);
+					categoryList.add(i, updatedCategory);
+					output = "Sucessfully Updated!";
+					break;
+				}else {
+					output += "Can't find Category Name";
+				}
+			}System.out.println(output);
+		}
+	}
 	public static void setHeader(String header) { // Hermione
 		Helper.line(80, "-");
 		System.out.println(header);
@@ -407,6 +431,7 @@ public class C206_CaseStudy {
 			System.out.println("Invalid CCA name");
 		}
 	}
+	
 
 	public static void viewAllRelatedCCAs(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // Done by
 																											// Hock
