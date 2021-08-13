@@ -46,7 +46,7 @@ public class C206_CaseStudy {
 
 				// Write Code on creating parents account with student information
 				Parent parent = newParent();
-				C206_CaseStudy.addParent(parentList, parent, studentList);
+				C206_CaseStudy.addParent(parentList, parent);
 
 				// Also add student into the student array list when parents registering with
 				// the student information
