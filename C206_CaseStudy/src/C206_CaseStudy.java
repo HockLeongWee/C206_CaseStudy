@@ -57,6 +57,7 @@ public class C206_CaseStudy {
 				boolean loged = parentLoginSystem(parentList);
 				if (loged) {
 					// Write code to view student that's added to the CCA - By Izzat
+					choice = 0;
 					while (choice != 3) {
 						C206_CaseStudy.studentInstructor();
 						choice = Helper.readInt("Enter choice > ");
@@ -82,7 +83,8 @@ public class C206_CaseStudy {
 				if (userName.equals("Admin") && password.equals("admin")) {
 
 					System.out.println("Login successfully! \n");
-					while (choice != 14) {
+					choice = 0;
+					while (choice != 15) {
 						C206_CaseStudy.ccaInstructor();
 						choice = Helper.readInt("Enter choice > ");
 						if (choice == 1) {
