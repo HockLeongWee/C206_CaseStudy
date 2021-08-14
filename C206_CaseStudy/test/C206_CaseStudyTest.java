@@ -206,4 +206,59 @@ public class C206_CaseStudyTest {
 		listofCCAs.remove(cca1);
 		assertTrue("Check that CCA arraylist is empty", listofCCAs.isEmpty());
 	}
+	
+	@Test
+  public void parentLoginTest() {
+    boolean isStudent = false;
+    int studentID = 20042341;
+    String CCARegID = "1234a";
+    studentList.add(s1);
+    studentList.add(s2);
+
+    assertNotNull(studentList.get(0).getId());
+    assertNotNull(studentList.get(0).getRegistrationId());
+
+    for (int i = 0; i < studentList.size(); i++) {
+      if (studentList.get(i).getId() == studentID && studentList.get(i).getRegistrationId() == CCARegID) {
+        isStudent = true;
+        System.out.println("The student ID entered is correct");
+      }
+    }
+
+    if (isStudent == false) {
+      System.out.println("The student ID entered is not correct");
+    }
+    assertEquals("Check if both Student ID and CCA Registration ID both exist in the studentList", true, isStudent);
+
+  }
+
+  @Test
+  public void addStudentTest() {
+    assertNotNull("Check student list is not null, so that can retrieve", studentList);
+    assertNotNull("Check CCa list is not null, so that can add student into CCA", CCAList);
+    assertEquals("Check that CCA List is now 1", CCAList.size());
+    // student list is not null, so that can retrieve
+    assertNotNull("Check student list is not null, so that can retrieve", studentList);
+    // CCA list is not null, so that can retrieve
+    assertNotNull("Check CCa list is not null, so that can retrieve", CCAList);
+    // check string should not be null
+    assertNotNull("check string not null");
+    assertNotEquals("There is no any register student in CCA", CCAList);
+
+  }
+
+  @Test
+  public void viewStudentTest() {
+    assertNotNull("Check student list is not null", studentList);
+
+  }
+
+  @Test
+  public void dropStudentTest() {
+    C206_CaseStudy cl = new C206_CaseStudy();
+    assertNotNull("Check if there is valid student to drop to", cl);
+    C206_CaseStudy.dropStudentFromCCA(studentList, CCAList);
+    // check the output contains then the registerd student id
+    assertTrue("There is no student regsitered with the student ID!");
+  }
 }
