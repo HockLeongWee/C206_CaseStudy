@@ -600,25 +600,35 @@ public class C206_CaseStudy {
 		return isChecked;
 	}
 
-	public static String retrieveCCAStudent(ArrayList<student> studentList) { // Done by Jun Long
+	public static String retrieveCCAStudent(ArrayList<student> studentList, ArrayList<CCA> CCAList) { // Done by Jun Long
 		String output = "";
 
 		for (int i = 0; i < studentList.size(); i++) {
-
-			output += String.format("%-15s %-20s %-15s %-15s %-15s\n", studentList.get(i).getName(),
-					studentList.get(i).getGrade(), studentList.get(i).getClassName(),
-					studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId());
+			if (studentList.get(i).getId() < CCAList.size()) {
+				int no = numberStudent(studentList, studentList.get(i).getId());
+				output += String.format("%-15s %-20s %-15s %-15s %-15s      %-15s      %-15s\n",
+						studentList.get(i).getName(), studentList.get(i).getGrade(), studentList.get(i).getClassName(),
+						studentList.get(i).getClassroomTeacher(), studentList.get(i).getRegistrationId(),
+						no + "/" + CCAList.get(studentList.get(i).getId()).getClasssize() + " students",
+						CCAList.get(studentList.get(i).getId()).getName());
+			}
 
 		}
 		return output;
 	}
 
-	private static void viewStudentOfCCa(ArrayList<student> studentList) { // Done by Jun Long
+	public static void viewStudentOfCCa(ArrayList<student> studentList, ArrayList<CCA> CCAList) { // Done by Jun Long
 		C206_CaseStudy.setHeader("CCA Added Students");
-		String output = String.format("%-15s %-20s %-15s %-15s %-15s\n", "STUDENT NAME", "GRADE", "CLASS", "TEACHER",
-				"REGISTRATION ID");
-		output += retrieveCCAStudent(studentList);
-		System.out.println(output);
+		String output = String.format("%-15s %-10s %-10s %-10s %-20s %-20s %-15s\n", "STUDENT NAME", "GRADE", "CLASS",
+				"TEACHER", "REGISTRATION ID", "No of Students", "CCA Student In");
+		String temp = retrieveCCAStudent(studentList, CCAList);
+		if (!temp.isEmpty()) {
+			output += temp;
+			System.out.println(output);
+		} else {
+			System.out.println("There is no registered student in any CCA\n");
+		}
+
 	}
 
 	public static int numberStudent(ArrayList<student> CCAList, int id) {// Done by Jun Long
@@ -714,9 +724,9 @@ public class C206_CaseStudy {
 					+ ". And the student will be removed from the CCA.");
 			studentList.remove(i);
 		} else if (choice.equalsIgnoreCase("no")) {
-			System.out.println(studentList.get(i).getName() + "failed to dropped from "
-					+ listofCCAs.get(studentList.get(i).getId())
-					+ ". And the student will not be removed from the CCA.");
+			System.out.println(
+					studentList.get(i).getName() + " failed to drop from " + listofCCAs.get(studentList.get(i).getId())
+							+ ". And the student will not be removed from the CCA.");
 		}
 	}
 
@@ -743,7 +753,7 @@ public class C206_CaseStudy {
 		boolean isValid = false;
 		for (int i = 0; i < parentList.size(); i++) {
 			if (parentList.get(i).getStudentID() == (studentID) && parentList.get(i).getRegisterID().equals(ccaID)) {
-				output += "Login successfully for student ID " + studentID + " and registration ID " + ccaID + " \n";
+				output = "Login successfully for student ID " + studentID + "\n";
 				isValid = true;
 				break;
 			} else if (parentList.get(i).getStudentID() == (studentID)) {
@@ -793,15 +803,15 @@ public class C206_CaseStudy {
 		if (lParent != null && cca != null) {
 			studentList.add(new student(ccaId, lParent.getStudentName(), (lParent.getGrade() + ""),
 					lParent.getClassroom(), lParent.getTeacher(), (lParent.getStudentID() + "")));
-			System.out.println("Student Added");
+			System.out.println("Student Added\n");
 		} else if (studentName.isEmpty() && ccaName.isEmpty()) {
-			System.out.println("Add Failed! Please fill in everything!");
+			System.out.println("Add Failed! Please fill in everything!\n");
 		} else if (lParent == null && cca == null) {
-			System.out.println("Student not added! As there is no student registered with that name in the CCA");
+			System.out.println("Student not added! As there is no student registered with that name in the CCA\n");
 		} else if (lParent == null) {
-			System.out.println("Student not added! As there is no student registered with that name.");
+			System.out.println("Student not added! As there is no student registered with that name.\n");
 		} else if (cca == null) {
-			System.out.println("The CCA does not exist!");
+			System.out.println("The CCA does not exist!\n");
 		}
 
 	}
