@@ -125,6 +125,8 @@ public class C206_CaseStudy {
 							C206_CaseStudy.DeleteStudent(studentList);////////////////////////// DELETE
 						} else if (choice == 13) {
 							// Add Student to CCA
+							int id = C206_CaseStudy.viewAllRelatedCCAs(listofCCAs, categoryList);
+							C206_CaseStudy.studentAddToCCA(listofCCAs, studentList, id);
 						} else if (choice == 14) {
 							// View Registered Student
 							C206_CaseStudy.viewStudentOfCCa(studentList, listofCCAs);
@@ -456,7 +458,7 @@ public class C206_CaseStudy {
 
 	public static int viewAllRelatedCCAs(ArrayList<CCA> listofCCAs, ArrayList<CategoryCCA> categoryList) { // Done by
 																											// Hock
-																											// Leong
+		C206_CaseStudy.viewAllCCACategory(categoryList)																									// Leong
 		int id = Helper.readInt("Enter the id you want to select > "); // Choose Category
 		String output = "";
 		output += String.format("%-20s %-52s %-12s %-20s %-15s %-18s %-15s\n", "CCA Name", "Description", "Class Size",
@@ -795,6 +797,48 @@ public class C206_CaseStudy {
 		} else if (lParent == null && cca == null) {
 			System.out.println("Student not added! As there is no student registered with that name in the CCA");
 		} else if (lParent == null) {
+			System.out.println("Student not added! As there is no student registered with that name.");
+		} else if (cca == null) {
+			System.out.println("The CCA does not exist!");
+		}
+
+	}
+	
+		public static void studentAddToCCA(ArrayList<CCA> CCAList, ArrayList<student> studentList, int id) { // Done by Jun Long
+		Helper.line(50, "-");
+		System.out.println("ADD STUDENT");
+		String studentName = Helper.readString("Enter the your name > ");
+		String ccaName = Helper.readString("Enter the CCA > ");
+		int ccaId = -1;
+		boolean ccaExist = false;
+		CCA cca = null;
+
+		// getting CCA whose name is our given CCA
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (ccaName.equalsIgnoreCase(CCAList.get(i).getName()) && CCAList.get(i).getCategordID() == id) {
+				ccaId = i;
+				cca = CCAList.get(i);
+			}
+		}
+		// getting student details from student name
+		student student = null;
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentName.equalsIgnoreCase(studentList.get(i).getName())) {
+
+				student = studentList.get(i);
+			}
+		}
+
+		// add the student which and note we get all student details from ccaa
+		if (student != null && cca != null) {
+			studentList.add(new student(ccaId, student.getName(), (student.getGrade() + ""),
+					student.getClassName(), student.getClassroomTeacher(), (student.getId() + "")));
+			System.out.println("Student Added");
+		} else if (studentName.isEmpty() && ccaName.isEmpty()) {
+			System.out.println("Add Failed! Please fill in everything!");
+		} else if (student == null && cca == null) {
+			System.out.println("Student not added! As there is no student registered with that name in the CCA");
+		} else if (student == null) {
 			System.out.println("Student not added! As there is no student registered with that name.");
 		} else if (cca == null) {
 			System.out.println("The CCA does not exist!");
